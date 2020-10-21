@@ -1,0 +1,1135 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Guideline Compliance",
+    "description": "Develops and applies a portfolio of guideline compliance tests to confirm adherence to procedures"
+  },
+  "host": "bianorg.azure-api.net",
+  "basePath": "/sd-guideline-cmplnce/v1",
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/guideline-compliance/guideline-compliance-assessment/{cr-reference-id}/recording": {
+      "post": {
+        "tags": [
+          "record"
+        ],
+        "summary": "Record feedback",
+        "operationId": "recordGuidelineComplianceAssessment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Compliance Audit Guideline Assessment Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Record control record request payload",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "businessUnitReference": {
+                  "type": "string",
+                  "example": "BURE4534",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "productServiceReference": {
+                  "type": "string",
+                  "example": "PRSRF9000",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "customerReference": {
+                  "type": "string",
+                  "example": "CSRE3456",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditGuidelineReference": {
+                  "type": "string",
+                  "example": "CAGR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditGuidelineAssessmentTaskRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\n",
+                  "properties": {}
+                },
+                "documentReference": {
+                  "type": "string",
+                  "example": "DR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                }
+              },
+              "example": {
+                "productServiceReference": "PRSRF9000",
+                "complianceAuditGuidelineAssessmentTaskRecord": "{}",
+                "customerReference": "CSRE3456",
+                "complianceAuditGuidelineReference": "CAGR123",
+                "documentReference": "DR123",
+                "businessUnitReference": "BURE4534"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "A new record is created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "recordingRecordReference": {
+                  "type": "string",
+                  "example": "CRRR3456",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditGuidelineAssessmentResult": {
+                  "type": "string",
+                  "example": "Applied",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                }
+              },
+              "example": {
+                "complianceAuditGuidelineAssessmentResult": "Applied",
+                "recordingRecordReference": "CRRR3456"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/guideline-compliance/guideline-compliance-assessment/evaluation": {
+      "post": {
+        "tags": [
+          "evaluate"
+        ],
+        "summary": "Request assessment",
+        "operationId": "evaluateGuidelineComplianceAssessment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "businessUnitReference": {
+                  "type": "string",
+                  "example": "BURE4534",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "productServiceReference": {
+                  "type": "string",
+                  "example": "PRSRF9000",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "customerReference": {
+                  "type": "string",
+                  "example": "CSRE3456",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditGuidelineReference": {
+                  "type": "string",
+                  "example": "CAGR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditGuidelineAssessmentTaskRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\n",
+                  "properties": {}
+                },
+                "documentReference": {
+                  "type": "string",
+                  "example": "DR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                }
+              },
+              "example": {
+                "productServiceReference": "PRSRF9000",
+                "complianceAuditGuidelineAssessmentTaskRecord": "{}",
+                "customerReference": "CSRE3456",
+                "complianceAuditGuidelineReference": "CAGR123",
+                "documentReference": "DR123",
+                "businessUnitReference": "BURE4534"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully created guideline compliance assessment report",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "complianceAuditGuidelineAssessmentReference": {
+                  "type": "string",
+                  "example": "CAGAR1222",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "businessUnitReference": {
+                  "type": "string",
+                  "example": "BURE4534",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "productServiceReference": {
+                  "type": "string",
+                  "example": "PRRF9000",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "customerReference": {
+                  "type": "string",
+                  "example": "CSRE3456",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditGuidelineReference": {
+                  "type": "string",
+                  "example": "CAGR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditGuidelineAssessmentTaskRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\n",
+                  "properties": {}
+                },
+                "complianceAuditGuidelineAssessmentResult": {
+                  "type": "string",
+                  "example": "Success",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                },
+                "documentReference": {
+                  "type": "string",
+                  "example": "DR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                }
+              },
+              "example": {
+                "productServiceReference": "PRRF9000",
+                "complianceAuditGuidelineAssessmentReference": "CAGAR1222",
+                "complianceAuditGuidelineAssessmentTaskRecord": "{}",
+                "complianceAuditGuidelineAssessmentResult": "Success",
+                "customerReference": "CSRE3456",
+                "complianceAuditGuidelineReference": "CAGR123",
+                "documentReference": "DR123",
+                "businessUnitReference": "BURE4534"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/guideline-compliance/guideline-compliance-assessment/{cr-reference-id}/advices/{bq-reference-id}/requisition": {
+      "put": {
+        "tags": [
+          "request"
+        ],
+        "summary": "Update advisory service",
+        "operationId": "requestGuidelineComplianceAssessmentUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Compliance Audit Guideline Assessment Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "bq-reference-id",
+            "in": "path",
+            "description": "Compliance/Audit Advisory Task Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request Guideline Compliance request payload",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "businessUnitEmployeeReference": {
+                  "type": "string",
+                  "example": "BUER123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "customerReference": {
+                  "type": "string",
+                  "example": "CR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditGuidelineReference": {
+                  "type": "string",
+                  "example": "CAGR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditAdvisoryTaskRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\n",
+                  "properties": {}
+                },
+                "documentReference": {
+                  "type": "string",
+                  "example": "DR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditGuidelineDefinition": {
+                  "type": "string",
+                  "example": "CAGD123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                },
+                "complianceAuditGuidelineComplianceReporting": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\n",
+                  "properties": {}
+                },
+                "complianceAuditGuidelineAccountability": {
+                  "type": "string",
+                  "example": "CAGA1",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                },
+                "ComplianceAuditGuidelinePenalties": {
+                  "type": "string",
+                  "example": "penalty-1",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                }
+              },
+              "example": {
+                "complianceAuditGuidelineDefinition": "CAGD123",
+                "complianceAuditAdvisoryTaskRecord": "{}",
+                "ComplianceAuditGuidelinePenalties": "penalty-1",
+                "complianceAuditGuidelineAccountability": "CAGA1",
+                "complianceAuditGuidelineComplianceReporting": "{}",
+                "customerReference": "CR123",
+                "businessUnitEmployeeReference": "BUER123",
+                "complianceAuditGuidelineReference": "CAGR123",
+                "documentReference": "DR123"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated Advice successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "complianceAuditGuidelineAssessmentReference": {
+                  "type": "string",
+                  "example": "CAGAR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditAdvisoryTaskReference": {
+                  "type": "string",
+                  "example": "CAATR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "businessUnitEmployeeReference": {
+                  "type": "string",
+                  "example": "BUER123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "customerReference": {
+                  "type": "string",
+                  "example": "CR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditGuidelineReference": {
+                  "type": "string",
+                  "example": "CAGR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditAdvisoryTaskRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\n",
+                  "properties": {}
+                },
+                "documentReference": {
+                  "type": "string",
+                  "example": "DR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditGuidelineDefinition": {
+                  "type": "string",
+                  "example": "CAGD123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                },
+                "complianceAuditGuidelineComplianceReporting": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\n",
+                  "properties": {}
+                },
+                "complianceAuditGuidelineAccountability": {
+                  "type": "string",
+                  "example": "CAGA1",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                },
+                "ComplianceAuditGuidelinePenalties": {
+                  "type": "string",
+                  "example": "penalty-1",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                }
+              },
+              "example": {
+                "complianceAuditGuidelineDefinition": "CAGD123",
+                "complianceAuditGuidelineAssessmentReference": "CAGAR123",
+                "complianceAuditAdvisoryTaskRecord": "{}",
+                "ComplianceAuditGuidelinePenalties": "penalty-1",
+                "complianceAuditGuidelineAccountability": "CAGA1",
+                "complianceAuditGuidelineComplianceReporting": "{}",
+                "complianceAuditAdvisoryTaskReference": "CAATR123",
+                "customerReference": "CR123",
+                "businessUnitEmployeeReference": "BUER123",
+                "complianceAuditGuidelineReference": "CAGR123",
+                "documentReference": "DR123"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/guideline-compliance/guideline-compliance-assessment/{cr-reference-id}/advices/requisition": {
+      "post": {
+        "tags": [
+          "request"
+        ],
+        "summary": "Create advisory service",
+        "operationId": "requestGuidelineComplianceAssessmentCreate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Compliance Audit Guideline Assessment Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request Guideline Compliance request payload",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "businessUnitEmployeeReference": {
+                  "type": "string",
+                  "example": "BUER123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "customerReference": {
+                  "type": "string",
+                  "example": "CR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditGuidelineReference": {
+                  "type": "string",
+                  "example": "CAGR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditAdvisoryTaskRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\n",
+                  "properties": {}
+                },
+                "documentReference": {
+                  "type": "string",
+                  "example": "DR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditGuidelineDefinition": {
+                  "type": "string",
+                  "example": "CAGD123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                },
+                "complianceAuditGuidelineComplianceReporting": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\n",
+                  "properties": {}
+                },
+                "complianceAuditGuidelineAccountability": {
+                  "type": "string",
+                  "example": "CAGA1",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                },
+                "ComplianceAuditGuidelinePenalties": {
+                  "type": "string",
+                  "example": "penalty-1",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                }
+              },
+              "example": {
+                "complianceAuditGuidelineDefinition": "CAGD123",
+                "complianceAuditAdvisoryTaskRecord": "{}",
+                "ComplianceAuditGuidelinePenalties": "penalty-1",
+                "complianceAuditGuidelineAccountability": "CAGA1",
+                "complianceAuditGuidelineComplianceReporting": "{}",
+                "customerReference": "CR123",
+                "businessUnitEmployeeReference": "BUER123",
+                "complianceAuditGuidelineReference": "CAGR123",
+                "documentReference": "DR123"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "complianceAuditGuidelineAssessmentReference": {
+                  "type": "string",
+                  "example": "CAGAR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditAdvisoryTaskReference": {
+                  "type": "string",
+                  "example": "CAATR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "businessUnitEmployeeReference": {
+                  "type": "string",
+                  "example": "BUER123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "customerReference": {
+                  "type": "string",
+                  "example": "CR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditGuidelineReference": {
+                  "type": "string",
+                  "example": "CAGR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditAdvisoryTaskRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\n",
+                  "properties": {}
+                },
+                "documentReference": {
+                  "type": "string",
+                  "example": "DR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditGuidelineDefinition": {
+                  "type": "string",
+                  "example": "CAGD123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                },
+                "complianceAuditGuidelineComplianceReporting": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\n",
+                  "properties": {}
+                },
+                "complianceAuditGuidelineAccountability": {
+                  "type": "string",
+                  "example": "CAGA1",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                },
+                "ComplianceAuditGuidelinePenalties": {
+                  "type": "string",
+                  "example": "penalty-1",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                }
+              },
+              "example": {
+                "complianceAuditGuidelineDefinition": "CAGD123",
+                "complianceAuditGuidelineAssessmentReference": "CAGAR123",
+                "complianceAuditAdvisoryTaskRecord": "{}",
+                "ComplianceAuditGuidelinePenalties": "penalty-1",
+                "complianceAuditGuidelineAccountability": "CAGA1",
+                "complianceAuditGuidelineComplianceReporting": "{}",
+                "complianceAuditAdvisoryTaskReference": "CAATR123",
+                "customerReference": "CR123",
+                "businessUnitEmployeeReference": "BUER123",
+                "complianceAuditGuidelineReference": "CAGR123",
+                "documentReference": "DR123"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/guideline-compliance/guideline-compliance-assessment/": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve Control Record Ids.",
+        "operationId": "retrieveGuidelineComplianceReferenceIds",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "collection-filter",
+            "in": "query",
+            "description": "Filter to refine the result set. ex- 'complianceAuditGuidelineAssessmentReference = CAGAR43563'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved guideline compliance control record",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": [
+                "CAGAR43563",
+                "CAGAR42374"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/guideline-compliance/guideline-compliance-assessment/behavior-qualifiers": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve all Behaviour Qualifier.",
+        "operationId": "retrieveGuidelineComplianceBahaviorQualifiers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": [
+                "advice"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/guideline-compliance/guideline-compliance-assessment/{cr-reference-id}/{behavior-qualifier}": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve Reference Ids.",
+        "operationId": "RetrieveBehaviorQualifierReferenceIds",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Compliance Audit Guideline Assessment Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "behavior-qualifier",
+            "in": "path",
+            "description": "Behavior Qualifier Name. ex- advice",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collection-filter",
+            "in": "query",
+            "description": "Filter to refine the result set. ex- customerReference = CR123",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": [
+                "ADR345",
+                "ADR234"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/guideline-compliance/guideline-compliance-assessment/{cr-reference-id}": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve Master Control Record",
+        "operationId": "RetrieveGuidelineCompliance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Compliance Audit Guideline Assessment Reference",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved master control record data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "complianceAuditGuidelineAssessmentReference": {
+                  "type": "string",
+                  "example": "CAGAR1222",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "businessUnitReference": {
+                  "type": "string",
+                  "example": "BURE4534",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "productServiceReference": {
+                  "type": "string",
+                  "example": "PRRF9000",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "customerReference": {
+                  "type": "string",
+                  "example": "CSRE3456",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditGuidelineReference": {
+                  "type": "string",
+                  "example": "CAGR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditGuidelineAssessmentTaskRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\n",
+                  "properties": {}
+                },
+                "complianceAuditGuidelineAssessmentResult": {
+                  "type": "string",
+                  "example": "Success",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                },
+                "documentReference": {
+                  "type": "string",
+                  "example": "DR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                }
+              },
+              "example": {
+                "productServiceReference": "PRRF9000",
+                "complianceAuditGuidelineAssessmentReference": "CAGAR1222",
+                "complianceAuditGuidelineAssessmentTaskRecord": "{}",
+                "complianceAuditGuidelineAssessmentResult": "Success",
+                "customerReference": "CSRE3456",
+                "complianceAuditGuidelineReference": "CAGR123",
+                "documentReference": "DR123",
+                "businessUnitReference": "BURE4534"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/guideline-compliance/guideline-compliance-assessment/{cr-reference-id}/advices/{bq-reference-id}": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve Advice",
+        "operationId": "RetrieveAdvice",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Compliance Audit Guideline Assessment Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "bq-reference-id",
+            "in": "path",
+            "description": "Compliance/Audit Advisory Task Reference",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "complianceAuditGuidelineAssessmentReference": {
+                  "type": "string",
+                  "example": "CAGAR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditAdvisoryTaskReference": {
+                  "type": "string",
+                  "example": "CAATR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "businessUnitEmployeeReference": {
+                  "type": "string",
+                  "example": "BUER123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "customerReference": {
+                  "type": "string",
+                  "example": "CR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditGuidelineReference": {
+                  "type": "string",
+                  "example": "CAGR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditAdvisoryTaskRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\n",
+                  "properties": {}
+                },
+                "documentReference": {
+                  "type": "string",
+                  "example": "DR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "complianceAuditGuidelineDefinition": {
+                  "type": "string",
+                  "example": "CAGD123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                },
+                "complianceAuditGuidelineComplianceReporting": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\n",
+                  "properties": {}
+                },
+                "complianceAuditGuidelineAccountability": {
+                  "type": "string",
+                  "example": "CAGA1",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                },
+                "ComplianceAuditGuidelinePenalties": {
+                  "type": "string",
+                  "example": "penalty-1",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                }
+              },
+              "example": {
+                "complianceAuditGuidelineDefinition": "CAGD123",
+                "complianceAuditGuidelineAssessmentReference": "CAGAR123",
+                "complianceAuditAdvisoryTaskRecord": "{}",
+                "ComplianceAuditGuidelinePenalties": "penalty-1",
+                "complianceAuditGuidelineAccountability": "CAGA1",
+                "complianceAuditGuidelineComplianceReporting": "{}",
+                "complianceAuditAdvisoryTaskReference": "CAATR123",
+                "customerReference": "CR123",
+                "businessUnitEmployeeReference": "BUER123",
+                "complianceAuditGuidelineReference": "CAGR123",
+                "documentReference": "DR123"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GuidelineComplianceAssessmentBase": {
+      "type": "object",
+      "properties": {
+        "businessUnitReference": {
+          "type": "string",
+          "example": "BURE4534",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        },
+        "productServiceReference": {
+          "type": "string",
+          "example": "PRSRF9000",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        },
+        "customerReference": {
+          "type": "string",
+          "example": "CSRE3456",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        },
+        "complianceAuditGuidelineReference": {
+          "type": "string",
+          "example": "CAGR123",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        },
+        "complianceAuditGuidelineAssessmentTaskRecord": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\n",
+          "properties": {}
+        },
+        "documentReference": {
+          "type": "string",
+          "example": "DR123",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        }
+      },
+      "example": {
+        "productServiceReference": "PRSRF9000",
+        "complianceAuditGuidelineAssessmentTaskRecord": "{}",
+        "customerReference": "CSRE3456",
+        "complianceAuditGuidelineReference": "CAGR123",
+        "documentReference": "DR123",
+        "businessUnitReference": "BURE4534"
+      }
+    },
+    "GuidelineComplianceAssessmentBaseWithIdAndRoot": {
+      "type": "object",
+      "properties": {
+        "complianceAuditGuidelineAssessmentReference": {
+          "type": "string",
+          "example": "CAGAR1222",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "businessUnitReference": {
+          "type": "string",
+          "example": "BURE4534",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        },
+        "productServiceReference": {
+          "type": "string",
+          "example": "PRRF9000",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        },
+        "customerReference": {
+          "type": "string",
+          "example": "CSRE3456",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        },
+        "complianceAuditGuidelineReference": {
+          "type": "string",
+          "example": "CAGR123",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        },
+        "complianceAuditGuidelineAssessmentTaskRecord": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\n",
+          "properties": {}
+        },
+        "complianceAuditGuidelineAssessmentResult": {
+          "type": "string",
+          "example": "Success",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+        },
+        "documentReference": {
+          "type": "string",
+          "example": "DR123",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        }
+      },
+      "example": {
+        "productServiceReference": "PRRF9000",
+        "complianceAuditGuidelineAssessmentReference": "CAGAR1222",
+        "complianceAuditGuidelineAssessmentTaskRecord": "{}",
+        "complianceAuditGuidelineAssessmentResult": "Success",
+        "customerReference": "CSRE3456",
+        "complianceAuditGuidelineReference": "CAGR123",
+        "documentReference": "DR123",
+        "businessUnitReference": "BURE4534"
+      }
+    },
+    "GuidelineComplianceRecordResponse": {
+      "type": "object",
+      "properties": {
+        "recordingRecordReference": {
+          "type": "string",
+          "example": "CRRR3456",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        },
+        "complianceAuditGuidelineAssessmentResult": {
+          "type": "string",
+          "example": "Applied",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+        }
+      },
+      "example": {
+        "complianceAuditGuidelineAssessmentResult": "Applied",
+        "recordingRecordReference": "CRRR3456"
+      }
+    },
+    "AdviceBase": {
+      "type": "object",
+      "properties": {
+        "businessUnitEmployeeReference": {
+          "type": "string",
+          "example": "BUER123",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        },
+        "customerReference": {
+          "type": "string",
+          "example": "CR123",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        },
+        "complianceAuditGuidelineReference": {
+          "type": "string",
+          "example": "CAGR123",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        },
+        "complianceAuditAdvisoryTaskRecord": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\n",
+          "properties": {}
+        },
+        "documentReference": {
+          "type": "string",
+          "example": "DR123",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        },
+        "complianceAuditGuidelineDefinition": {
+          "type": "string",
+          "example": "CAGD123",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+        },
+        "complianceAuditGuidelineComplianceReporting": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\n",
+          "properties": {}
+        },
+        "complianceAuditGuidelineAccountability": {
+          "type": "string",
+          "example": "CAGA1",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+        },
+        "ComplianceAuditGuidelinePenalties": {
+          "type": "string",
+          "example": "penalty-1",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+        }
+      },
+      "example": {
+        "complianceAuditGuidelineDefinition": "CAGD123",
+        "complianceAuditAdvisoryTaskRecord": "{}",
+        "ComplianceAuditGuidelinePenalties": "penalty-1",
+        "complianceAuditGuidelineAccountability": "CAGA1",
+        "complianceAuditGuidelineComplianceReporting": "{}",
+        "customerReference": "CR123",
+        "businessUnitEmployeeReference": "BUER123",
+        "complianceAuditGuidelineReference": "CAGR123",
+        "documentReference": "DR123"
+      }
+    },
+    "AdviceBaseWithIds": {
+      "type": "object",
+      "properties": {
+        "complianceAuditGuidelineAssessmentReference": {
+          "type": "string",
+          "example": "CAGAR123",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        },
+        "complianceAuditAdvisoryTaskReference": {
+          "type": "string",
+          "example": "CAATR123",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        },
+        "businessUnitEmployeeReference": {
+          "type": "string",
+          "example": "BUER123",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        },
+        "customerReference": {
+          "type": "string",
+          "example": "CR123",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        },
+        "complianceAuditGuidelineReference": {
+          "type": "string",
+          "example": "CAGR123",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        },
+        "complianceAuditAdvisoryTaskRecord": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\n",
+          "properties": {}
+        },
+        "documentReference": {
+          "type": "string",
+          "example": "DR123",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        },
+        "complianceAuditGuidelineDefinition": {
+          "type": "string",
+          "example": "CAGD123",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+        },
+        "complianceAuditGuidelineComplianceReporting": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\n",
+          "properties": {}
+        },
+        "complianceAuditGuidelineAccountability": {
+          "type": "string",
+          "example": "CAGA1",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+        },
+        "ComplianceAuditGuidelinePenalties": {
+          "type": "string",
+          "example": "penalty-1",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+        }
+      },
+      "example": {
+        "complianceAuditGuidelineDefinition": "CAGD123",
+        "complianceAuditGuidelineAssessmentReference": "CAGAR123",
+        "complianceAuditAdvisoryTaskRecord": "{}",
+        "ComplianceAuditGuidelinePenalties": "penalty-1",
+        "complianceAuditGuidelineAccountability": "CAGA1",
+        "complianceAuditGuidelineComplianceReporting": "{}",
+        "complianceAuditAdvisoryTaskReference": "CAATR123",
+        "customerReference": "CR123",
+        "businessUnitEmployeeReference": "BUER123",
+        "complianceAuditGuidelineReference": "CAGR123",
+        "documentReference": "DR123"
+      }
+    }
+  }
+}

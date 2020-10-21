@@ -1,0 +1,1673 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Financial Gateway",
+    "description": "Operates automated message interfaces to secure networks such as SWIFT, TELEX, and ACH"
+  },
+  "host": "bianorg.azure-api.net",
+  "basePath": "/sd-financial-gateway/v1",
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/financial-gateway/financial-gateway-operating-session": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve available Financial Gateway Control Record IDs.",
+        "operationId": "RetrieveFinancialGatewayReferenceIds",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "collection-filter",
+            "in": "query",
+            "description": "Filter to refine the result set; ex. - 'gatewayServiceConfigurationParameterType = \"security setting\"'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved Financial Gateway Control Record IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": [
+                "GOSR123",
+                "GOSR345"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/financial-gateway/financial-gateway-operating-session/behavior-qualifiers": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve all Behavior Qualifier names in the Financial Gateway Service Domain.",
+        "operationId": "RetrieveFinancialGatewayBehaviorQualifiers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved all Behavior Qualifier names in the Financial Gateway Service Domain.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": [
+                "inbound",
+                "outbound",
+                "issues",
+                "reporting"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/financial-gateway/financial-gateway-operating-session/{cr-reference-id}/{behavior-qualifier}": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve BQ Reference IDs of the given Financial Gateway Behavior Qualifier",
+        "operationId": "RetrieveFinancialGatewayBQIds",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Gateway Operating Session Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "behavior-qualifier",
+            "in": "path",
+            "description": "Behavior Qualifier Name; ex. - \"inbound\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collection-filter",
+            "in": "query",
+            "description": "Filter to refine the result set; ex. - \"gatewayInboundMessageStatus = pending\"",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved Financial Gateway Behavior Qualifier reference IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": [
+                "GIMR345",
+                "GIMR789",
+                "GIMR456"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/financial-gateway/financial-gateway-operating-session/{cr-reference-id}": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve Financial Gateway Master Control Record data",
+        "operationId": "RetrieveFinancialGateway",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Gateway Operating Session Reference",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved Financial Gateway Master Control Record data.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "gatewayOperatingSessionReference": {
+                  "type": "string",
+                  "example": "OSR7346465",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: refers to active EBranch service session\n"
+                },
+                "gatewayServiceReference": {
+                  "type": "string",
+                  "example": "GSR746565",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: refers to the service, e.g., S.W.I.F.T., Telex\n"
+                },
+                "gatewayServiceSchedule": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: describes service availability\n",
+                  "properties": {}
+                },
+                "gatewayServiceConfigurationParameterType": {
+                  "type": "string",
+                  "example": "security setting",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                },
+                "gatewayServiceConfigurationParameter": {
+                  "type": "string",
+                  "example": "high security",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: the setting/value for a service parameter\n"
+                },
+                "gatewayServiceSecurityMechanismType": {
+                  "type": "string",
+                  "example": "encryption keys",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                },
+                "gatewayServiceSecurityMechanismReference": {
+                  "type": "string",
+                  "example": "GSMR7365465",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                }
+              },
+              "example": {
+                "gatewayServiceSecurityMechanismType": "encryption keys",
+                "gatewayServiceConfigurationParameterType": "security setting",
+                "gatewayServiceConfigurationParameter": "high security",
+                "gatewayServiceSchedule": "{}",
+                "gatewayOperatingSessionReference": "OSR7346465",
+                "gatewayServiceReference": "GSR746565",
+                "gatewayServiceSecurityMechanismReference": "GSMR7365465"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financial-gateway/financial-gateway-operating-session/{cr-reference-id}/inbounds/{bq-reference-id}": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve Financial Gateway Inbound Message record",
+        "operationId": "RetrieveInbound",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Gateway Operating Session Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "bq-reference-id",
+            "in": "path",
+            "description": "Gateway Inbound Message Reference",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully Retrieved Financial Gateway Inbound Message record",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "gatewayServiceReference": {
+                  "type": "string",
+                  "example": "GSR724645735",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: service reference id\n"
+                },
+                "gatewayOperatingSessionReference": {
+                  "type": "string",
+                  "example": "GOSR746565",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: active service session reference id\n"
+                },
+                "gatewayInboundMessageReference": {
+                  "type": "string",
+                  "example": "GIMR7354646",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: inbound connection reference id\n"
+                },
+                "gatewayInboundMessageType": {
+                  "type": "string",
+                  "example": "urgent",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: message type\n"
+                },
+                "gatewayInboundMessageRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: message content\n",
+                  "properties": {}
+                },
+                "gatewayInboundMessageReceiver": {
+                  "type": "string",
+                  "example": "EBU74655",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: employee/business unit addressed by the message\n"
+                },
+                "gatewayInboundMessageStatus": {
+                  "type": "string",
+                  "example": "pending",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: e.g., pending, delivered, possible duplicate, error\n"
+                },
+                "gatewayServiceSessionStatistics": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: maintained service activity statistics\n",
+                  "properties": {}
+                }
+              },
+              "example": {
+                "gatewayInboundMessageStatus": "pending",
+                "gatewayServiceSessionStatistics": "{}",
+                "gatewayInboundMessageReceiver": "EBU74655",
+                "gatewayInboundMessageType": "urgent",
+                "gatewayServiceReference": "GSR724645735",
+                "gatewayOperatingSessionReference": "GOSR746565",
+                "gatewayInboundMessageRecord": "{}",
+                "gatewayInboundMessageReference": "GIMR7354646"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financial-gateway/financial-gateway-operating-session/{cr-reference-id}/outbounds/{bq-reference-id}": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve Financial Gateway Outbound Message record.",
+        "operationId": "RetrieveOutbound",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Gateway Operating Session Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "bq-reference-id",
+            "in": "path",
+            "description": "Gateway Outbound Message Reference",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully Retrieved Financial Gateway Outbound Message record.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "gatewayServiceReference": {
+                  "type": "string",
+                  "example": "GSR724645735",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: service reference id\n"
+                },
+                "gatewayOperatingSessionReference": {
+                  "type": "string",
+                  "example": "GOSR746565",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: active service session reference id\n"
+                },
+                "gatewayOutboundMessageReference": {
+                  "type": "string",
+                  "example": "OMR736465",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: outbound connection reference id\n"
+                },
+                "gatewayOutboundMessageType": {
+                  "type": "string",
+                  "example": "urgent",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: message type\n"
+                },
+                "gatewayOutboundMessageRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: message content\n",
+                  "properties": {}
+                },
+                "gatewayOutboundMessageSender": {
+                  "type": "string",
+                  "example": "EBU746565",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: employee/business unit sending the message\n"
+                },
+                "gatewayOutboundMessageReceiver": {
+                  "type": "string",
+                  "example": "OMR736465",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: Message addressee\n"
+                },
+                "gatewayOutboundMessageStatus": {
+                  "type": "string",
+                  "example": "pending",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: e.g., pending, delivered, possible duplicate, error\n"
+                },
+                "gatewayServiceSessionStatistics": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: maintained service activity statistics\n",
+                  "properties": {}
+                }
+              },
+              "example": {
+                "gatewayServiceSessionStatistics": "{}",
+                "gatewayOutboundMessageRecord": "{}",
+                "gatewayOutboundMessageSender": "EBU746565",
+                "gatewayOutboundMessageReceiver": "OMR736465",
+                "gatewayOutboundMessageStatus": "pending",
+                "gatewayServiceReference": "GSR724645735",
+                "gatewayOperatingSessionReference": "GOSR746565",
+                "gatewayOutboundMessageType": "urgent",
+                "gatewayOutboundMessageReference": "OMR736465"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financial-gateway/financial-gateway-operating-session/{cr-reference-id}/issues/{bq-reference-id}": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve a Financial Gateway Issues Message record",
+        "operationId": "RetrieveIssue",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Gateway Operating Session Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "bq-reference-id",
+            "in": "path",
+            "description": "Gateway Service Issue Reference",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully Retrieved Financial Gateway Inbound Message record",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "gatewayServiceReference": {
+                  "type": "string",
+                  "example": "GSR724645735",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: service reference id\n"
+                },
+                "gatewayOperatingSessionReference": {
+                  "type": "string",
+                  "example": "GOSR746565",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: active service session reference id\n"
+                },
+                "gatewayServiceIssueReference": {
+                  "type": "string",
+                  "example": "GSIR746575",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: reference id of the issue raised\n"
+                },
+                "employeeBusinessUnitReference": {
+                  "type": "string",
+                  "example": "EBU736464",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: the reference id of the employee/business unit that the issue is reported by\n"
+                },
+                "messageReference": {
+                  "type": "string",
+                  "example": "MSG73647458",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: the reference id of the message involved in the issue\n"
+                },
+                "productionIssueType": {
+                  "type": "string",
+                  "example": "network failure",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: type of event/error being recorded\n"
+                },
+                "productionIssueDescription": {
+                  "type": "string",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: description of the event error\n"
+                },
+                "productionIssueDiagnosis": {
+                  "type": "string",
+                  "example": "Router failure",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: evaluation of the event cause and impact\n"
+                },
+                "productionIssueResolutionTask": {
+                  "type": "string",
+                  "example": "Replace router hardware",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: description of the corrective action\n"
+                },
+                "productionIssueRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: detail of the issue, response, and interested parties\n",
+                  "properties": {}
+                },
+                "productionIssueStatus": {
+                  "type": "string",
+                  "example": "pending",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: tracking the state of resolution of a reported issue\n"
+                }
+              },
+              "example": {
+                "messageReference": "MSG73647458",
+                "employeeBusinessUnitReference": "EBU736464",
+                "productionIssueType": "network failure",
+                "productionIssueStatus": "pending",
+                "productionIssueResolutionTask": "Replace router hardware",
+                "productionIssueDiagnosis": "Router failure",
+                "productionIssueRecord": "{}",
+                "gatewayServiceReference": "GSR724645735",
+                "gatewayOperatingSessionReference": "GOSR746565",
+                "productionIssueDescription": "productionIssueDescription",
+                "gatewayServiceIssueReference": "GSIR746575"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financial-gateway/financial-gateway-operating-session/{cr-reference-id}/reportings/{bq-reference-id}": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve  Financial Gateway Reporting record",
+        "operationId": "RetrieveReporting",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Gateway Operating Session Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "bq-reference-id",
+            "in": "path",
+            "description": "Gateway Service Session Report Reference",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully Retrieved Financial Gateway Reporting record",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "gatewayOperatingSessionReference": {
+                  "type": "string",
+                  "example": "GOSR746565",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: active service session reference id\n"
+                },
+                "gatewayServiceSessionReportReference": {
+                  "type": "string",
+                  "example": "GSRR736465",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: reference id of the report\n"
+                },
+                "gatewayServiceSessionReportType": {
+                  "type": "string",
+                  "example": "realtime status",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: e.g., realtime status, session statistics\n"
+                },
+                "gatewayServiceSessionStatistics": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: maintained service activity statistics\n",
+                  "properties": {}
+                },
+                "gatewayServiceConfigurationParameter": {
+                  "type": "string",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: the setting/value for a service parameter\n"
+                },
+                "gatewayServiceSessionReport": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: the session activity report\n",
+                  "properties": {}
+                }
+              },
+              "example": {
+                "gatewayServiceSessionStatistics": "{}",
+                "gatewayServiceSessionReport": "{}",
+                "gatewayServiceConfigurationParameter": "gatewayServiceConfigurationParameter",
+                "gatewayServiceSessionReportReference": "GSRR736465",
+                "gatewayOperatingSessionReference": "GOSR746565",
+                "gatewayServiceSessionReportType": "realtime status"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financial-gateway/financial-gateway-operating-session/{cr-reference-id}/recording": {
+      "post": {
+        "tags": [
+          "record"
+        ],
+        "summary": "Records a Financial Gateway",
+        "operationId": "recordFinancialGateway",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Gateway Operating Session Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Record control record request payload",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "recordingRecordType": {
+                  "type": "string",
+                  "example": "Behavior model performance feedback",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: the layout/type of the feedback provided\n"
+                },
+                "recordingRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: the feedback\n",
+                  "properties": {}
+                },
+                "recordingRecordDateTime": {
+                  "type": "string",
+                  "pattern": "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)T(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.[0-9]+)?(?:Z|[+-][01]\\d:[0-5]\\d)?$",
+                  "description": "`status: Registered`,\niso-link: [click_here](https://www.iso20022.org/standardsrepository/public/wqt/Description/mx/dico/datatypes/_YW1tKtp-Ed-ak6NoX_4Aeg_-1624336183)\ngeneral-info: A particular point in the progression of time defined by a mandatory date and a mandatory time component, expressed in either UTC time format (YYYY-MM-DDThh:mm:ss.sssZ), local time with UTC offset format (YYYY-MM-DDThh:mm:ss.sss+/-hh:mm), or local time format (YYYY-MM-DDThh:mm:ss.sss). These representations are defined in \"XML Schema Part 2: Datatypes Second Edition - W3C Recommendation 28 October 2004\" which is aligned with ISO 8601.\nNote on the time format:\n1) beginning / end of calendar day\n00:00:00 = the beginning of a calendar day\n24:00:00 = the end of a calendar day\n2) fractions of second in time format\nDecimal fractions of seconds may be included. In this case, the involved parties shall agree on the maximum number of digits that are allowed.\n",
+                  "example": "2018-09-26T05:56:05.007"
+                },
+                "employeeBusinessUnitReference": {
+                  "type": "string",
+                  "example": "REF456",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                }
+              },
+              "example": {
+                "recordingRecordType": "Behavior model performance feedback",
+                "employeeBusinessUnitReference": "REF456",
+                "recordingRecordDateTime": "2018-09-26T05:56:05.007",
+                "recordingRecord": "{}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "A new Record is created.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "recordingRecordReference": {
+                  "type": "string",
+                  "example": "RRR4678",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+                },
+                "recordingRecordStatus": {
+                  "type": "string",
+                  "example": "Applied",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                }
+              },
+              "example": {
+                "recordingRecordReference": "RRR4678",
+                "recordingRecordStatus": "Applied"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financial-gateway/financial-gateway-operating-session/{cr-reference-id}/inbounds/{bq-reference-id}/execution": {
+      "put": {
+        "tags": [
+          "execute"
+        ],
+        "summary": "Update a Financial Gateway Inbound Message record",
+        "description": "Update a Financial Gateway Inbound Message record",
+        "operationId": "ExecuteInboundUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Gateway Operating Session Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "bq-reference-id",
+            "in": "path",
+            "description": "Gateway Inbound Message Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Execute inbounds request payload",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "gatewayInboundMessageType": {
+                  "type": "string",
+                  "example": "urgent",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                },
+                "gatewayInboundMessageRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: message content\n",
+                  "properties": {}
+                },
+                "gatewayInboundMessageReceiver": {
+                  "type": "string",
+                  "example": "EBU7346565",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: employee/business unit addressed by the message\n"
+                },
+                "gatewayInboundMessageStatus": {
+                  "type": "string",
+                  "example": "pending",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: e.g., pending, delivered, possible duplicate, error\n"
+                },
+                "gatewayServiceSessionStatistics": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: maintained service activity statistics\n",
+                  "properties": {}
+                }
+              },
+              "example": {
+                "gatewayInboundMessageStatus": "pending",
+                "gatewayServiceSessionStatistics": "{}",
+                "gatewayInboundMessageReceiver": "EBU7346565",
+                "gatewayInboundMessageType": "urgent",
+                "gatewayInboundMessageRecord": "{}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully Updated a Financial Gateway Inbound Message record",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "gatewayServiceReference": {
+                  "type": "string",
+                  "example": "GSR724645735",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: service reference id\n"
+                },
+                "gatewayOperatingSessionReference": {
+                  "type": "string",
+                  "example": "GOSR746565",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: active service session reference id\n"
+                },
+                "gatewayInboundMessageReference": {
+                  "type": "string",
+                  "example": "GIMR7354646",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: inbound connection reference id\n"
+                },
+                "gatewayInboundMessageType": {
+                  "type": "string",
+                  "example": "urgent",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: message type\n"
+                },
+                "gatewayInboundMessageRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: message content\n",
+                  "properties": {}
+                },
+                "gatewayInboundMessageReceiver": {
+                  "type": "string",
+                  "example": "EBU74655",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: employee/business unit addressed by the message\n"
+                },
+                "gatewayInboundMessageStatus": {
+                  "type": "string",
+                  "example": "pending",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: e.g., pending, delivered, possible duplicate, error\n"
+                },
+                "gatewayServiceSessionStatistics": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: maintained service activity statistics\n",
+                  "properties": {}
+                }
+              },
+              "example": {
+                "gatewayInboundMessageStatus": "pending",
+                "gatewayServiceSessionStatistics": "{}",
+                "gatewayInboundMessageReceiver": "EBU74655",
+                "gatewayInboundMessageType": "urgent",
+                "gatewayServiceReference": "GSR724645735",
+                "gatewayOperatingSessionReference": "GOSR746565",
+                "gatewayInboundMessageRecord": "{}",
+                "gatewayInboundMessageReference": "GIMR7354646"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financial-gateway/financial-gateway-operating-session/{cr-reference-id}/inbounds/execution": {
+      "post": {
+        "tags": [
+          "execute"
+        ],
+        "summary": "Create a Financial Gateway Inbound Message record",
+        "description": "Create a Financial Gateway Inbound Message record",
+        "operationId": "ExecuteInboundCreate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Gateway Operating Session Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Execute inbounds request payload",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "gatewayInboundMessageType": {
+                  "type": "string",
+                  "example": "urgent",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+                },
+                "gatewayInboundMessageRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: message content\n",
+                  "properties": {}
+                },
+                "gatewayInboundMessageReceiver": {
+                  "type": "string",
+                  "example": "EBU7346565",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: employee/business unit addressed by the message\n"
+                },
+                "gatewayInboundMessageStatus": {
+                  "type": "string",
+                  "example": "pending",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: e.g., pending, delivered, possible duplicate, error\n"
+                },
+                "gatewayServiceSessionStatistics": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: maintained service activity statistics\n",
+                  "properties": {}
+                }
+              },
+              "example": {
+                "gatewayInboundMessageStatus": "pending",
+                "gatewayServiceSessionStatistics": "{}",
+                "gatewayInboundMessageReceiver": "EBU7346565",
+                "gatewayInboundMessageType": "urgent",
+                "gatewayInboundMessageRecord": "{}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully Created a Financial Gateway Inbound Message record",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "gatewayServiceReference": {
+                  "type": "string",
+                  "example": "GSR724645735",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: service reference id\n"
+                },
+                "gatewayOperatingSessionReference": {
+                  "type": "string",
+                  "example": "GOSR746565",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: active service session reference id\n"
+                },
+                "gatewayInboundMessageReference": {
+                  "type": "string",
+                  "example": "GIMR7354646",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: inbound connection reference id\n"
+                },
+                "gatewayInboundMessageType": {
+                  "type": "string",
+                  "example": "urgent",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: message type\n"
+                },
+                "gatewayInboundMessageRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: message content\n",
+                  "properties": {}
+                },
+                "gatewayInboundMessageReceiver": {
+                  "type": "string",
+                  "example": "EBU74655",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: employee/business unit addressed by the message\n"
+                },
+                "gatewayInboundMessageStatus": {
+                  "type": "string",
+                  "example": "pending",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: e.g., pending, delivered, possible duplicate, error\n"
+                },
+                "gatewayServiceSessionStatistics": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: maintained service activity statistics\n",
+                  "properties": {}
+                }
+              },
+              "example": {
+                "gatewayInboundMessageStatus": "pending",
+                "gatewayServiceSessionStatistics": "{}",
+                "gatewayInboundMessageReceiver": "EBU74655",
+                "gatewayInboundMessageType": "urgent",
+                "gatewayServiceReference": "GSR724645735",
+                "gatewayOperatingSessionReference": "GOSR746565",
+                "gatewayInboundMessageRecord": "{}",
+                "gatewayInboundMessageReference": "GIMR7354646"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financial-gateway/financial-gateway-operating-session/{cr-reference-id}/outbounds/{bq-reference-id}/execution": {
+      "put": {
+        "tags": [
+          "execute"
+        ],
+        "summary": "Update Financial Gateway Outbound Message record",
+        "description": "Update Financial Gateway Outbound Message record",
+        "operationId": "ExecuteOutboundUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Gateway Operating Session Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "bq-reference-id",
+            "in": "path",
+            "description": "Gateway Outbound Message Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Execute outbounds request payload",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "gatewayOutboundMessageType": {
+                  "type": "string",
+                  "example": "urgent",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: message type\n"
+                },
+                "gatewayOutboundMessageRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: message content\n",
+                  "properties": {}
+                },
+                "gatewayOutboundMessageSender": {
+                  "type": "string",
+                  "example": "EBU746565",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: employee/business unit sending the message\n"
+                },
+                "gatewayOutboundMessageReceiver": {
+                  "type": "string",
+                  "example": "OMR736465",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: Message addressee\n"
+                },
+                "gatewayOutboundMessageStatus": {
+                  "type": "string",
+                  "example": "pending",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: e.g., pending, delivered, possible duplicate, error\n"
+                },
+                "gatewayServiceSessionStatistics": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: maintained service activity statistics\n",
+                  "properties": {}
+                }
+              },
+              "example": {
+                "gatewayServiceSessionStatistics": "{}",
+                "gatewayOutboundMessageRecord": "{}",
+                "gatewayOutboundMessageSender": "EBU746565",
+                "gatewayOutboundMessageReceiver": "OMR736465",
+                "gatewayOutboundMessageStatus": "pending",
+                "gatewayOutboundMessageType": "urgent"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully Updated Financial Gateway Outbound Message record",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "gatewayServiceReference": {
+                  "type": "string",
+                  "example": "GSR724645735",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: service reference id\n"
+                },
+                "gatewayOperatingSessionReference": {
+                  "type": "string",
+                  "example": "GOSR746565",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: active service session reference id\n"
+                },
+                "gatewayOutboundMessageReference": {
+                  "type": "string",
+                  "example": "OMR736465",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: outbound connection reference id\n"
+                },
+                "gatewayOutboundMessageType": {
+                  "type": "string",
+                  "example": "urgent",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: message type\n"
+                },
+                "gatewayOutboundMessageRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: message content\n",
+                  "properties": {}
+                },
+                "gatewayOutboundMessageSender": {
+                  "type": "string",
+                  "example": "EBU746565",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: employee/business unit sending the message\n"
+                },
+                "gatewayOutboundMessageReceiver": {
+                  "type": "string",
+                  "example": "OMR736465",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: Message addressee\n"
+                },
+                "gatewayOutboundMessageStatus": {
+                  "type": "string",
+                  "example": "pending",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: e.g., pending, delivered, possible duplicate, error\n"
+                },
+                "gatewayServiceSessionStatistics": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: maintained service activity statistics\n",
+                  "properties": {}
+                }
+              },
+              "example": {
+                "gatewayServiceSessionStatistics": "{}",
+                "gatewayOutboundMessageRecord": "{}",
+                "gatewayOutboundMessageSender": "EBU746565",
+                "gatewayOutboundMessageReceiver": "OMR736465",
+                "gatewayOutboundMessageStatus": "pending",
+                "gatewayServiceReference": "GSR724645735",
+                "gatewayOperatingSessionReference": "GOSR746565",
+                "gatewayOutboundMessageType": "urgent",
+                "gatewayOutboundMessageReference": "OMR736465"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financial-gateway/financial-gateway-operating-session/{cr-reference-id}/outbounds/execution": {
+      "post": {
+        "tags": [
+          "execute"
+        ],
+        "summary": "Created Financial Gateway Outbound Message record",
+        "description": "Created Financial Gateway Outbound Message record",
+        "operationId": "ExecuteOutboundCreate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Gateway Operating Session Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Execute outbounds request payload",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "gatewayOutboundMessageType": {
+                  "type": "string",
+                  "example": "urgent",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: message type\n"
+                },
+                "gatewayOutboundMessageRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: message content\n",
+                  "properties": {}
+                },
+                "gatewayOutboundMessageSender": {
+                  "type": "string",
+                  "example": "EBU746565",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: employee/business unit sending the message\n"
+                },
+                "gatewayOutboundMessageReceiver": {
+                  "type": "string",
+                  "example": "OMR736465",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: Message addressee\n"
+                },
+                "gatewayOutboundMessageStatus": {
+                  "type": "string",
+                  "example": "pending",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: e.g., pending, delivered, possible duplicate, error\n"
+                },
+                "gatewayServiceSessionStatistics": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: maintained service activity statistics\n",
+                  "properties": {}
+                }
+              },
+              "example": {
+                "gatewayServiceSessionStatistics": "{}",
+                "gatewayOutboundMessageRecord": "{}",
+                "gatewayOutboundMessageSender": "EBU746565",
+                "gatewayOutboundMessageReceiver": "OMR736465",
+                "gatewayOutboundMessageStatus": "pending",
+                "gatewayOutboundMessageType": "urgent"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully Created Financial Gateway Outbound Message record",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "gatewayServiceReference": {
+                  "type": "string",
+                  "example": "GSR724645735",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: service reference id\n"
+                },
+                "gatewayOperatingSessionReference": {
+                  "type": "string",
+                  "example": "GOSR746565",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: active service session reference id\n"
+                },
+                "gatewayOutboundMessageReference": {
+                  "type": "string",
+                  "example": "OMR736465",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: outbound connection reference id\n"
+                },
+                "gatewayOutboundMessageType": {
+                  "type": "string",
+                  "example": "urgent",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: message type\n"
+                },
+                "gatewayOutboundMessageRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: message content\n",
+                  "properties": {}
+                },
+                "gatewayOutboundMessageSender": {
+                  "type": "string",
+                  "example": "EBU746565",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: employee/business unit sending the message\n"
+                },
+                "gatewayOutboundMessageReceiver": {
+                  "type": "string",
+                  "example": "OMR736465",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: Message addressee\n"
+                },
+                "gatewayOutboundMessageStatus": {
+                  "type": "string",
+                  "example": "pending",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: e.g., pending, delivered, possible duplicate, error\n"
+                },
+                "gatewayServiceSessionStatistics": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: maintained service activity statistics\n",
+                  "properties": {}
+                }
+              },
+              "example": {
+                "gatewayServiceSessionStatistics": "{}",
+                "gatewayOutboundMessageRecord": "{}",
+                "gatewayOutboundMessageSender": "EBU746565",
+                "gatewayOutboundMessageReceiver": "OMR736465",
+                "gatewayOutboundMessageStatus": "pending",
+                "gatewayServiceReference": "GSR724645735",
+                "gatewayOperatingSessionReference": "GOSR746565",
+                "gatewayOutboundMessageType": "urgent",
+                "gatewayOutboundMessageReference": "OMR736465"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RetrieveFinancialGatewayResponse": {
+      "type": "object",
+      "properties": {
+        "gatewayOperatingSessionReference": {
+          "type": "string",
+          "example": "OSR7346465",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: refers to active EBranch service session\n"
+        },
+        "gatewayServiceReference": {
+          "type": "string",
+          "example": "GSR746565",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: refers to the service, e.g., S.W.I.F.T., Telex\n"
+        },
+        "gatewayServiceSchedule": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: describes service availability\n",
+          "properties": {}
+        },
+        "gatewayServiceConfigurationParameterType": {
+          "type": "string",
+          "example": "security setting",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+        },
+        "gatewayServiceConfigurationParameter": {
+          "type": "string",
+          "example": "high security",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: the setting/value for a service parameter\n"
+        },
+        "gatewayServiceSecurityMechanismType": {
+          "type": "string",
+          "example": "encryption keys",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+        },
+        "gatewayServiceSecurityMechanismReference": {
+          "type": "string",
+          "example": "GSMR7365465",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        }
+      },
+      "example": {
+        "gatewayServiceSecurityMechanismType": "encryption keys",
+        "gatewayServiceConfigurationParameterType": "security setting",
+        "gatewayServiceConfigurationParameter": "high security",
+        "gatewayServiceSchedule": "{}",
+        "gatewayOperatingSessionReference": "OSR7346465",
+        "gatewayServiceReference": "GSR746565",
+        "gatewayServiceSecurityMechanismReference": "GSMR7365465"
+      }
+    },
+    "InboundBase": {
+      "type": "object",
+      "properties": {
+        "gatewayInboundMessageType": {
+          "type": "string",
+          "example": "urgent",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+        },
+        "gatewayInboundMessageRecord": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: message content\n",
+          "properties": {}
+        },
+        "gatewayInboundMessageReceiver": {
+          "type": "string",
+          "example": "EBU7346565",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: employee/business unit addressed by the message\n"
+        },
+        "gatewayInboundMessageStatus": {
+          "type": "string",
+          "example": "pending",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: e.g., pending, delivered, possible duplicate, error\n"
+        },
+        "gatewayServiceSessionStatistics": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: maintained service activity statistics\n",
+          "properties": {}
+        }
+      },
+      "example": {
+        "gatewayInboundMessageStatus": "pending",
+        "gatewayServiceSessionStatistics": "{}",
+        "gatewayInboundMessageReceiver": "EBU7346565",
+        "gatewayInboundMessageType": "urgent",
+        "gatewayInboundMessageRecord": "{}"
+      }
+    },
+    "InboundBaseWithIdAndRoot": {
+      "type": "object",
+      "properties": {
+        "gatewayServiceReference": {
+          "type": "string",
+          "example": "GSR724645735",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: service reference id\n"
+        },
+        "gatewayOperatingSessionReference": {
+          "type": "string",
+          "example": "GOSR746565",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: active service session reference id\n"
+        },
+        "gatewayInboundMessageReference": {
+          "type": "string",
+          "example": "GIMR7354646",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: inbound connection reference id\n"
+        },
+        "gatewayInboundMessageType": {
+          "type": "string",
+          "example": "urgent",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: message type\n"
+        },
+        "gatewayInboundMessageRecord": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: message content\n",
+          "properties": {}
+        },
+        "gatewayInboundMessageReceiver": {
+          "type": "string",
+          "example": "EBU74655",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: employee/business unit addressed by the message\n"
+        },
+        "gatewayInboundMessageStatus": {
+          "type": "string",
+          "example": "pending",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: e.g., pending, delivered, possible duplicate, error\n"
+        },
+        "gatewayServiceSessionStatistics": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: maintained service activity statistics\n",
+          "properties": {}
+        }
+      },
+      "example": {
+        "gatewayInboundMessageStatus": "pending",
+        "gatewayServiceSessionStatistics": "{}",
+        "gatewayInboundMessageReceiver": "EBU74655",
+        "gatewayInboundMessageType": "urgent",
+        "gatewayServiceReference": "GSR724645735",
+        "gatewayOperatingSessionReference": "GOSR746565",
+        "gatewayInboundMessageRecord": "{}",
+        "gatewayInboundMessageReference": "GIMR7354646"
+      }
+    },
+    "OutboundBase": {
+      "type": "object",
+      "properties": {
+        "gatewayOutboundMessageType": {
+          "type": "string",
+          "example": "urgent",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: message type\n"
+        },
+        "gatewayOutboundMessageRecord": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: message content\n",
+          "properties": {}
+        },
+        "gatewayOutboundMessageSender": {
+          "type": "string",
+          "example": "EBU746565",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: employee/business unit sending the message\n"
+        },
+        "gatewayOutboundMessageReceiver": {
+          "type": "string",
+          "example": "OMR736465",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: Message addressee\n"
+        },
+        "gatewayOutboundMessageStatus": {
+          "type": "string",
+          "example": "pending",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: e.g., pending, delivered, possible duplicate, error\n"
+        },
+        "gatewayServiceSessionStatistics": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: maintained service activity statistics\n",
+          "properties": {}
+        }
+      },
+      "example": {
+        "gatewayServiceSessionStatistics": "{}",
+        "gatewayOutboundMessageRecord": "{}",
+        "gatewayOutboundMessageSender": "EBU746565",
+        "gatewayOutboundMessageReceiver": "OMR736465",
+        "gatewayOutboundMessageStatus": "pending",
+        "gatewayOutboundMessageType": "urgent"
+      }
+    },
+    "OutboundBaseWithIdAndRoot": {
+      "type": "object",
+      "properties": {
+        "gatewayServiceReference": {
+          "type": "string",
+          "example": "GSR724645735",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: service reference id\n"
+        },
+        "gatewayOperatingSessionReference": {
+          "type": "string",
+          "example": "GOSR746565",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: active service session reference id\n"
+        },
+        "gatewayOutboundMessageReference": {
+          "type": "string",
+          "example": "OMR736465",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: outbound connection reference id\n"
+        },
+        "gatewayOutboundMessageType": {
+          "type": "string",
+          "example": "urgent",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: message type\n"
+        },
+        "gatewayOutboundMessageRecord": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: message content\n",
+          "properties": {}
+        },
+        "gatewayOutboundMessageSender": {
+          "type": "string",
+          "example": "EBU746565",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: employee/business unit sending the message\n"
+        },
+        "gatewayOutboundMessageReceiver": {
+          "type": "string",
+          "example": "OMR736465",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: Message addressee\n"
+        },
+        "gatewayOutboundMessageStatus": {
+          "type": "string",
+          "example": "pending",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: e.g., pending, delivered, possible duplicate, error\n"
+        },
+        "gatewayServiceSessionStatistics": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: maintained service activity statistics\n",
+          "properties": {}
+        }
+      },
+      "example": {
+        "gatewayServiceSessionStatistics": "{}",
+        "gatewayOutboundMessageRecord": "{}",
+        "gatewayOutboundMessageSender": "EBU746565",
+        "gatewayOutboundMessageReceiver": "OMR736465",
+        "gatewayOutboundMessageStatus": "pending",
+        "gatewayServiceReference": "GSR724645735",
+        "gatewayOperatingSessionReference": "GOSR746565",
+        "gatewayOutboundMessageType": "urgent",
+        "gatewayOutboundMessageReference": "OMR736465"
+      }
+    },
+    "IssueBaseWithIdAndRoot": {
+      "type": "object",
+      "properties": {
+        "gatewayServiceReference": {
+          "type": "string",
+          "example": "GSR724645735",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: service reference id\n"
+        },
+        "gatewayOperatingSessionReference": {
+          "type": "string",
+          "example": "GOSR746565",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: active service session reference id\n"
+        },
+        "gatewayServiceIssueReference": {
+          "type": "string",
+          "example": "GSIR746575",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: reference id of the issue raised\n"
+        },
+        "employeeBusinessUnitReference": {
+          "type": "string",
+          "example": "EBU736464",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: the reference id of the employee/business unit that the issue is reported by\n"
+        },
+        "messageReference": {
+          "type": "string",
+          "example": "MSG73647458",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: the reference id of the message involved in the issue\n"
+        },
+        "productionIssueType": {
+          "type": "string",
+          "example": "network failure",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: type of event/error being recorded\n"
+        },
+        "productionIssueDescription": {
+          "type": "string",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: description of the event error\n"
+        },
+        "productionIssueDiagnosis": {
+          "type": "string",
+          "example": "Router failure",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: evaluation of the event cause and impact\n"
+        },
+        "productionIssueResolutionTask": {
+          "type": "string",
+          "example": "Replace router hardware",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: description of the corrective action\n"
+        },
+        "productionIssueRecord": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: detail of the issue, response, and interested parties\n",
+          "properties": {}
+        },
+        "productionIssueStatus": {
+          "type": "string",
+          "example": "pending",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: tracking the state of resolution of a reported issue\n"
+        }
+      },
+      "example": {
+        "messageReference": "MSG73647458",
+        "employeeBusinessUnitReference": "EBU736464",
+        "productionIssueType": "network failure",
+        "productionIssueStatus": "pending",
+        "productionIssueResolutionTask": "Replace router hardware",
+        "productionIssueDiagnosis": "Router failure",
+        "productionIssueRecord": "{}",
+        "gatewayServiceReference": "GSR724645735",
+        "gatewayOperatingSessionReference": "GOSR746565",
+        "productionIssueDescription": "productionIssueDescription",
+        "gatewayServiceIssueReference": "GSIR746575"
+      }
+    },
+    "ReportingBaseWithIdAndRoot": {
+      "type": "object",
+      "properties": {
+        "gatewayOperatingSessionReference": {
+          "type": "string",
+          "example": "GOSR746565",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: active service session reference id\n"
+        },
+        "gatewayServiceSessionReportReference": {
+          "type": "string",
+          "example": "GSRR736465",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: reference id of the report\n"
+        },
+        "gatewayServiceSessionReportType": {
+          "type": "string",
+          "example": "realtime status",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: e.g., realtime status, session statistics\n"
+        },
+        "gatewayServiceSessionStatistics": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: maintained service activity statistics\n",
+          "properties": {}
+        },
+        "gatewayServiceConfigurationParameter": {
+          "type": "string",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: the setting/value for a service parameter\n"
+        },
+        "gatewayServiceSessionReport": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: the session activity report\n",
+          "properties": {}
+        }
+      },
+      "example": {
+        "gatewayServiceSessionStatistics": "{}",
+        "gatewayServiceSessionReport": "{}",
+        "gatewayServiceConfigurationParameter": "gatewayServiceConfigurationParameter",
+        "gatewayServiceSessionReportReference": "GSRR736465",
+        "gatewayOperatingSessionReference": "GOSR746565",
+        "gatewayServiceSessionReportType": "realtime status"
+      }
+    },
+    "FinancialGatewayRecordRequest": {
+      "type": "object",
+      "properties": {
+        "recordingRecordType": {
+          "type": "string",
+          "example": "Behavior model performance feedback",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: the layout/type of the feedback provided\n"
+        },
+        "recordingRecord": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: the feedback\n",
+          "properties": {}
+        },
+        "recordingRecordDateTime": {
+          "type": "string",
+          "pattern": "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)T(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.[0-9]+)?(?:Z|[+-][01]\\d:[0-5]\\d)?$",
+          "description": "`status: Registered`,\niso-link: [click_here](https://www.iso20022.org/standardsrepository/public/wqt/Description/mx/dico/datatypes/_YW1tKtp-Ed-ak6NoX_4Aeg_-1624336183)\ngeneral-info: A particular point in the progression of time defined by a mandatory date and a mandatory time component, expressed in either UTC time format (YYYY-MM-DDThh:mm:ss.sssZ), local time with UTC offset format (YYYY-MM-DDThh:mm:ss.sss+/-hh:mm), or local time format (YYYY-MM-DDThh:mm:ss.sss). These representations are defined in \"XML Schema Part 2: Datatypes Second Edition - W3C Recommendation 28 October 2004\" which is aligned with ISO 8601.\nNote on the time format:\n1) beginning / end of calendar day\n00:00:00 = the beginning of a calendar day\n24:00:00 = the end of a calendar day\n2) fractions of second in time format\nDecimal fractions of seconds may be included. In this case, the involved parties shall agree on the maximum number of digits that are allowed.\n",
+          "example": "2018-09-26T05:56:05.007"
+        },
+        "employeeBusinessUnitReference": {
+          "type": "string",
+          "example": "REF456",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        }
+      },
+      "example": {
+        "recordingRecordType": "Behavior model performance feedback",
+        "employeeBusinessUnitReference": "REF456",
+        "recordingRecordDateTime": "2018-09-26T05:56:05.007",
+        "recordingRecord": "{}"
+      }
+    },
+    "FinancialGatewayRecordResponse": {
+      "type": "object",
+      "properties": {
+        "recordingRecordReference": {
+          "type": "string",
+          "example": "RRR4678",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\n"
+        },
+        "recordingRecordStatus": {
+          "type": "string",
+          "example": "Applied",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\n"
+        }
+      },
+      "example": {
+        "recordingRecordReference": "RRR4678",
+        "recordingRecordStatus": "Applied"
+      }
+    },
+    "FinancialGatewayConfigureRequest": {
+      "type": "object",
+      "properties": {
+        "gatewayServiceReference": {
+          "type": "string",
+          "example": "GSR724645735",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: service reference id\n"
+        },
+        "gatewaySchedule": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: describes service availability\n",
+          "properties": {}
+        },
+        "gatewayServiceConfigurationParameterType": {
+          "type": "string",
+          "example": "security setting",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: e.g., security setting, menu options\n"
+        },
+        "gatewayServiceConfigurationParameter": {
+          "type": "string",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: the setting/value for a service parameter\n"
+        }
+      }
+    },
+    "FinancialGatewayConfigureResponse": {
+      "type": "object",
+      "properties": {
+        "gatewayServiceReference": {
+          "type": "string",
+          "example": "GSR724645735",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: service reference id\n"
+        },
+        "gatewayOperatingSessionReference": {
+          "type": "string",
+          "example": "GOSR746565",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier\ngeneral-info: active service session reference id\n"
+        },
+        "gatewaySchedule": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary\ngeneral-info: describes service availability\n",
+          "properties": {}
+        },
+        "gatewayServiceConfigurationParameterType": {
+          "type": "string",
+          "example": "security setting",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: e.g., security setting, menu options\n"
+        },
+        "gatewayServiceConfigurationParameter": {
+          "type": "string",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text\ngeneral-info: the setting/value for a service parameter\n"
+        }
+      }
+    },
+    "ISODateTime": {
+      "type": "string",
+      "pattern": "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)T(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.[0-9]+)?(?:Z|[+-][01]\\d:[0-5]\\d)?$",
+      "description": "`status: Registered`,\niso-link: [click_here](https://www.iso20022.org/standardsrepository/public/wqt/Description/mx/dico/datatypes/_YW1tKtp-Ed-ak6NoX_4Aeg_-1624336183)\ngeneral-info: A particular point in the progression of time defined by a mandatory date and a mandatory time component, expressed in either UTC time format (YYYY-MM-DDThh:mm:ss.sssZ), local time with UTC offset format (YYYY-MM-DDThh:mm:ss.sss+/-hh:mm), or local time format (YYYY-MM-DDThh:mm:ss.sss). These representations are defined in \"XML Schema Part 2: Datatypes Second Edition - W3C Recommendation 28 October 2004\" which is aligned with ISO 8601.\nNote on the time format:\n1) beginning / end of calendar day\n00:00:00 = the beginning of a calendar day\n24:00:00 = the end of a calendar day\n2) fractions of second in time format\nDecimal fractions of seconds may be included. In this case, the involved parties shall agree on the maximum number of digits that are allowed.\n",
+      "example": "2018-09-26T05:56:05.007"
+    }
+  }
+}

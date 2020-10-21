@@ -1,0 +1,2005 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Payment Execution",
+    "description": "Processes the movement of funds between accounts within the bank or to/from an another account"
+  },
+  "host": "bianorg.azure-api.net",
+  "basePath": "/sd-payment-execution/v1",
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/payment-execution/payment-execution-procedure/{cr-reference-id}/updation": {
+      "put": {
+        "tags": [
+          "update"
+        ],
+        "summary": "Update: Payment transaction update/repair",
+        "description": "Update/amend details of an active payment execution transaction ",
+        "operationId": "updatePaymentExecutionProcedure",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Payment Transaction Request Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update Control record payload",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "paymentExecutionTransaction": {
+                  "type": "string",
+                  "example": "Authorizaton",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "paymentTransactionUpdateDescription": {
+                  "type": "string",
+                  "example": "TransactionDescription",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "paymentTransaction": {
+                  "type": "string",
+                  "example": "CreditTransfer",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "paymentTransactionInitiatorReference": {
+                  "type": "string",
+                  "example": "PTIR2320",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payerReference": {
+                  "type": "string",
+                  "example": "PYRE5345",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payerBankReference": {
+                  "type": "string",
+                  "example": "PYBR1093",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeReference": {
+                  "type": "string",
+                  "example": "PAEE5007",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeProductInstanceReference": {
+                  "type": "string",
+                  "example": "PAIR7456",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeBankReference": {
+                  "type": "string",
+                  "example": "PEBR2783",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "amount": {
+                  "type": "string",
+                  "example": "$5000",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Amount    \n"
+                },
+                "currency": {
+                  "type": "string",
+                  "example": "USD",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "dateType": {
+                  "type": "string",
+                  "example": "Order",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "date": {
+                  "type": "string",
+                  "example": "2018-08-28",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Date    \n"
+                },
+                "paymentMechanism": {
+                  "type": "string",
+                  "example": "NEFT",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Name    \n"
+                }
+              },
+              "example": {
+                "date": "2018-08-28",
+                "amount": "$5000",
+                "payeeReference": "PAEE5007",
+                "payeeProductInstanceReference": "PAIR7456",
+                "payerBankReference": "PYBR1093",
+                "payeeBankReference": "PEBR2783",
+                "paymentExecutionTransaction": "Authorizaton",
+                "paymentTransactionInitiatorReference": "PTIR2320",
+                "dateType": "Order",
+                "payerReference": "PYRE5345",
+                "currency": "USD",
+                "paymentTransaction": "CreditTransfer",
+                "paymentTransactionUpdateDescription": "TransactionDescription",
+                "paymentMechanism": "NEFT"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful updated",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "paymentTransactionUpdateReference": {
+                  "type": "string",
+                  "example": "PTUR5435",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "paymentTransactionRequestReference": {
+                  "type": "string",
+                  "example": "PTRR345",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "paymentExecutionTransaction": {
+                  "type": "string",
+                  "example": "Authorizaton",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "paymentTransactionUpdateDescription": {
+                  "type": "string",
+                  "example": "TransactionDescription",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "paymentTransaction": {
+                  "type": "string",
+                  "example": "CreditTransfer",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "paymentTransactionInitiatorReference": {
+                  "type": "string",
+                  "example": "PTIR2320",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payerReference": {
+                  "type": "string",
+                  "example": "PYRE5345",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payerBankReference": {
+                  "type": "string",
+                  "example": "PYBR1093",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeReference": {
+                  "type": "string",
+                  "example": "PAEE5007",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeProductInstanceReference": {
+                  "type": "string",
+                  "example": "PAIR7456",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeBankReference": {
+                  "type": "string",
+                  "example": "PEBR2783",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "amount": {
+                  "type": "string",
+                  "example": "$5000",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Amount    \n"
+                },
+                "currency": {
+                  "type": "string",
+                  "example": "USD",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "dateType": {
+                  "type": "string",
+                  "example": "Order",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "date": {
+                  "type": "string",
+                  "example": "2018-08-28",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Date    \n"
+                },
+                "paymentMechanism": {
+                  "type": "string",
+                  "example": "NEFT",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Name    \n"
+                },
+                "paymentTransactionUpdateResult": {
+                  "type": "string",
+                  "example": "Success",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                }
+              },
+              "example": {
+                "date": "2018-08-28",
+                "amount": "$5000",
+                "payeeReference": "PAEE5007",
+                "payeeProductInstanceReference": "PAIR7456",
+                "payerBankReference": "PYBR1093",
+                "payeeBankReference": "PEBR2783",
+                "paymentTransactionRequestReference": "PTRR345",
+                "paymentTransactionUpdateReference": "PTUR5435",
+                "paymentTransactionUpdateResult": "Success",
+                "paymentExecutionTransaction": "Authorizaton",
+                "paymentTransactionInitiatorReference": "PTIR2320",
+                "dateType": "Order",
+                "payerReference": "PYRE5345",
+                "currency": "USD",
+                "paymentTransaction": "CreditTransfer",
+                "paymentTransactionUpdateDescription": "TransactionDescription",
+                "paymentMechanism": "NEFT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment-execution/payment-execution-procedure/{cr-reference-id}/recording": {
+      "post": {
+        "tags": [
+          "record"
+        ],
+        "summary": "Record: Record activity/feedback relating to payment execution activity",
+        "description": "Record feedback/activity against the payment execution process",
+        "operationId": "recordPaymentExecutionProcedure",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Payment Transaction Request Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Record Control record payload",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "recordingRecordType": {
+                  "type": "string",
+                  "example": "BehaviorModelPerformanceFeedback",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "recordingRecord": {
+                  "type": "object",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary  \n",
+                  "properties": {}
+                },
+                "recordingRecordDateTime": {
+                  "type": "string",
+                  "example": "2018-08-28T09:00:00",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::DateTime    \n"
+                },
+                "empolyeeBusinessUnitReference": {
+                  "type": "string",
+                  "example": "EBUR6798",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                }
+              },
+              "example": {
+                "recordingRecordType": "BehaviorModelPerformanceFeedback",
+                "empolyeeBusinessUnitReference": "EBUR6798",
+                "recordingRecordDateTime": "2018-08-28T09:00:00",
+                "recordingRecord": "{}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "A new record is created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "recordingRecordReference": {
+                  "type": "string",
+                  "example": "CRRR3456",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "recordingRecordStatus": {
+                  "type": "string",
+                  "example": "Applied",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                }
+              },
+              "example": {
+                "recordingRecordReference": "CRRR3456",
+                "recordingRecordStatus": "Applied"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment-execution/payment-execution-procedure/{cr-reference-id}/execution": {
+      "put": {
+        "tags": [
+          "execute"
+        ],
+        "summary": "Update an existing payment execution transaction detail capture",
+        "description": "Update an existing payment detail capture",
+        "operationId": "executePaymentExecutionProcedureUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Payment Transaction Request Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updates payment detail capture",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "paymentTransactionUpdateReference": {
+                  "type": "string",
+                  "example": "PTUR5435",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "paymentTransactionUpdateDescription": {
+                  "type": "string",
+                  "example": "TransactionDescription",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "paymentTransactionUpdateResult": {
+                  "type": "string",
+                  "example": "Success",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                }
+              },
+              "example": {
+                "paymentTransactionUpdateResult": "Success",
+                "paymentTransactionUpdateDescription": "TransactionDescription",
+                "paymentTransactionUpdateReference": "PTUR5435"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully updated the payment detail capture payload",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "paymentTransactionRequestReference": {
+                  "type": "string",
+                  "example": "PTRR8767",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "paymentTransactionInitiatorReference": {
+                  "type": "string",
+                  "example": "PTIR3246",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payerReference": {
+                  "type": "string",
+                  "example": "PYRF4543",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payerBankReference": {
+                  "type": "string",
+                  "example": "PYBR5463",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payerProductInstanceReference": {
+                  "type": "string",
+                  "example": "PPIR5322",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeReference": {
+                  "type": "string",
+                  "example": "PER5547",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeProductInstanceReference": {
+                  "type": "string",
+                  "example": "PPIR2457",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeBankReference": {
+                  "type": "string",
+                  "example": "PBR6879",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "amount": {
+                  "type": "string",
+                  "example": "$5000",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Amount    \n"
+                },
+                "currency": {
+                  "type": "string",
+                  "example": "USD",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "dateType": {
+                  "type": "string",
+                  "example": "booking",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "date": {
+                  "type": "string",
+                  "example": "2018-09-05",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Date    \n"
+                },
+                "paymentMechanism": {
+                  "type": "string",
+                  "example": "SWIFT",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Name\n"
+                }
+              },
+              "example": {
+                "date": "2018-09-05",
+                "payerProductInstanceReference": "PPIR5322",
+                "amount": "$5000",
+                "payeeReference": "PER5547",
+                "payeeProductInstanceReference": "PPIR2457",
+                "payerBankReference": "PYBR5463",
+                "payeeBankReference": "PBR6879",
+                "paymentTransactionRequestReference": "PTRR8767",
+                "paymentTransactionInitiatorReference": "PTIR3246",
+                "dateType": "booking",
+                "payerReference": "PYRF4543",
+                "currency": "USD",
+                "paymentMechanism": "SWIFT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment-execution/payment-execution-procedure/execution": {
+      "post": {
+        "tags": [
+          "execute"
+        ],
+        "summary": "Create a new payment execution transaction detail capture",
+        "description": "Create a new payment detail capture",
+        "operationId": "executePaymentExecutionProcedureCreate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Creates a new payment detail capture",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "paymentTransactionUpdateReference": {
+                  "type": "string",
+                  "example": "PTUR5435",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "paymentTransactionUpdateDescription": {
+                  "type": "string",
+                  "example": "TransactionDescription",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "paymentTransactionUpdateResult": {
+                  "type": "string",
+                  "example": "Success",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                }
+              },
+              "example": {
+                "paymentTransactionUpdateResult": "Success",
+                "paymentTransactionUpdateDescription": "TransactionDescription",
+                "paymentTransactionUpdateReference": "PTUR5435"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successfully created the payment detail capture payload",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "paymentTransactionRequestReference": {
+                  "type": "string",
+                  "example": "PTRR8767",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "paymentTransactionInitiatorReference": {
+                  "type": "string",
+                  "example": "PTIR3246",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payerReference": {
+                  "type": "string",
+                  "example": "PYRF4543",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payerBankReference": {
+                  "type": "string",
+                  "example": "PYBR5463",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payerProductInstanceReference": {
+                  "type": "string",
+                  "example": "PPIR5322",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeReference": {
+                  "type": "string",
+                  "example": "PER5547",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeProductInstanceReference": {
+                  "type": "string",
+                  "example": "PPIR2457",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeBankReference": {
+                  "type": "string",
+                  "example": "PBR6879",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "amount": {
+                  "type": "string",
+                  "example": "$5000",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Amount    \n"
+                },
+                "currency": {
+                  "type": "string",
+                  "example": "USD",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "dateType": {
+                  "type": "string",
+                  "example": "booking",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "date": {
+                  "type": "string",
+                  "example": "2018-09-05",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Date    \n"
+                },
+                "paymentMechanism": {
+                  "type": "string",
+                  "example": "SWIFT",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Name\n"
+                }
+              },
+              "example": {
+                "date": "2018-09-05",
+                "payerProductInstanceReference": "PPIR5322",
+                "amount": "$5000",
+                "payeeReference": "PER5547",
+                "payeeProductInstanceReference": "PPIR2457",
+                "payerBankReference": "PYBR5463",
+                "payeeBankReference": "PBR6879",
+                "paymentTransactionRequestReference": "PTRR8767",
+                "paymentTransactionInitiatorReference": "PTIR3246",
+                "dateType": "booking",
+                "payerReference": "PYRF4543",
+                "currency": "USD",
+                "paymentMechanism": "SWIFT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment-execution/payment-execution-procedure/": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve Payment Execution Control Record Ids available within the Service Domain.",
+        "operationId": "RetrievePaymentExecutionReferenceIds",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "collection-filter",
+            "in": "query",
+            "description": "Filter to refine the result set. ex- 'payer-reference = PR123'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": [
+                "PTRR123",
+                "PTRR345"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/payment-execution/payment-execution-procedure/behavior-qualifiers/": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve all Behaviour Qualifier names in the Payment Execution Service Domain.",
+        "operationId": "RetrievePaymentExecutionBehaviorQualifiers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": [
+                "transaction",
+                "mechanism",
+                "update",
+                "reporting"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/payment-execution/payment-execution-procedure/{cr-reference-id}/{behavior-qualifier}/": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve Behaviour Qualifier Reference Ids of the given Behavior Qulifier.",
+        "operationId": "RetrieveBehaviorQualifierReferenceIds",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Payment Transaction Request Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "behavior-qualifier",
+            "in": "path",
+            "description": "Behavior Qualifier Name. ex- transaction",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collection-filter",
+            "in": "query",
+            "description": "Filter to refine the result set. ex- 'amount > $5000'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": [
+                "TR345",
+                "TR789",
+                "TR456"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/payment-execution/payment-execution-procedure/{cr-reference-id}": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve Payment Details",
+        "description": "Retrieve Payment execution transaction detail capture data",
+        "operationId": "retrievePaymentExecution",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Payment Transaction Request Reference",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "paymentTransactionRequestReference": {
+                  "type": "string",
+                  "example": "PTRR8767",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "paymentTransactionInitiatorReference": {
+                  "type": "string",
+                  "example": "PTIR3246",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payerReference": {
+                  "type": "string",
+                  "example": "PYRF4543",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payerBankReference": {
+                  "type": "string",
+                  "example": "PYBR5463",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payerProductInstanceReference": {
+                  "type": "string",
+                  "example": "PPIR5322",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeReference": {
+                  "type": "string",
+                  "example": "PER5547",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeProductInstanceReference": {
+                  "type": "string",
+                  "example": "PPIR2457",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeBankReference": {
+                  "type": "string",
+                  "example": "PBR6879",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "amount": {
+                  "type": "string",
+                  "example": "$5000",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Amount    \n"
+                },
+                "currency": {
+                  "type": "string",
+                  "example": "USD",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "dateType": {
+                  "type": "string",
+                  "example": "booking",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "date": {
+                  "type": "string",
+                  "example": "2018-09-05",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Date    \n"
+                },
+                "paymentMechanism": {
+                  "type": "string",
+                  "example": "SWIFT",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Name\n"
+                }
+              },
+              "example": {
+                "date": "2018-09-05",
+                "payerProductInstanceReference": "PPIR5322",
+                "amount": "$5000",
+                "payeeReference": "PER5547",
+                "payeeProductInstanceReference": "PPIR2457",
+                "payerBankReference": "PYBR5463",
+                "payeeBankReference": "PBR6879",
+                "paymentTransactionRequestReference": "PTRR8767",
+                "paymentTransactionInitiatorReference": "PTIR3246",
+                "dateType": "booking",
+                "payerReference": "PYRF4543",
+                "currency": "USD",
+                "paymentMechanism": "SWIFT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment-execution/payment-execution-procedure/{cr-reference-id}/transactions/{bq-reference-id}": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve Payment Transactions",
+        "description": "Retrieve Payment execution transaction details",
+        "operationId": "retrievePaymentExecutionTransactions",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Payment Transaction Request Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "bq-reference-id",
+            "in": "path",
+            "description": "Payment Transaction Reference",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully retrieved",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "paymenTransactionReference": {
+                  "type": "string",
+                  "example": "PRR123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "paymentTransactionRequestReference": {
+                  "type": "string",
+                  "example": "PTRR4343",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "paymentExecutionTransaction": {
+                  "type": "string",
+                  "example": "PET123",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "paymentOrderReference": {
+                  "type": "string",
+                  "example": "POR789",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payerAccountReference": {
+                  "type": "string",
+                  "example": "PA8567",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeAccountReference": {
+                  "type": "string",
+                  "example": "PAR12389",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "washAccountReference": {
+                  "type": "string",
+                  "example": "WAR5677",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "intermediaryAccountReference": {
+                  "type": "string",
+                  "example": "IAR123545",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "currency": {
+                  "type": "string",
+                  "example": "USD",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "dateType": {
+                  "type": "string",
+                  "example": "booking",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "date": {
+                  "type": "string",
+                  "example": "2018-09-06",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Date    \n"
+                },
+                "paymentMechanism": {
+                  "type": "string",
+                  "example": "SWIFT",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Name    \n"
+                }
+              },
+              "example": {
+                "date": "2018-09-06",
+                "paymentExecutionTransaction": "PET123",
+                "intermediaryAccountReference": "IAR123545",
+                "dateType": "booking",
+                "payerAccountReference": "PA8567",
+                "paymentTransactionRequestReference": "PTRR4343",
+                "currency": "USD",
+                "washAccountReference": "WAR5677",
+                "payeeAccountReference": "PAR12389",
+                "paymenTransactionReference": "PRR123",
+                "paymentOrderReference": "POR789",
+                "paymentMechanism": "SWIFT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment-execution/payment-execution-procedure/{cr-reference-id}/mechanisms/{bq-reference-id}": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve Payment Mechanisms",
+        "description": "Retrieve Payment execution mechanism details",
+        "operationId": "retrievePaymentExecutionMechanisms",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Payment Transaction Request Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "bq-reference-id",
+            "in": "path",
+            "description": "Payment Transaction Mechanism Reference",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "paymentTransactionMechanismReference": {
+                  "type": "string",
+                  "example": "PTMR345",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "paymentTransactionRequestReference": {
+                  "type": "string",
+                  "example": "PTRR5678",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "paymentExecutionTransaction": {
+                  "type": "string",
+                  "example": "PET5674",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "achAccessServiceSessionReference": {
+                  "type": "string",
+                  "example": "ACHR4567",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "achAccessSchedule": {
+                  "type": "string",
+                  "example": "2018/09-2019/08",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Duration    \n"
+                },
+                "correspondentServiceSessionReference": {
+                  "type": "string",
+                  "example": "CSSR5678",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "correspondentServiceAccessSchedule": {
+                  "type": "string",
+                  "example": "2018/09-2019/08",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Duration     \n"
+                }
+              },
+              "example": {
+                "correspondentServiceAccessSchedule": "2018/09-2019/08",
+                "paymentExecutionTransaction": "PET5674",
+                "correspondentServiceSessionReference": "CSSR5678",
+                "paymentTransactionMechanismReference": "PTMR345",
+                "paymentTransactionRequestReference": "PTRR5678",
+                "achAccessServiceSessionReference": "ACHR4567",
+                "achAccessSchedule": "2018/09-2019/08"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment-execution/payment-execution-procedure/{cr-reference-id}/updates/{bq-reference-id}": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve Payment Updates",
+        "description": "Retrieve Payment execution update details",
+        "operationId": "retrievePaymentExecutionUpdates",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Payment Transaction Request Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "bq-reference-id",
+            "in": "path",
+            "description": "Payment Transaction Update Reference",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully retrieved",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "paymentTransactionUpdateReference": {
+                  "type": "string",
+                  "example": "PTUR5435",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "paymentTransactionRequestReference": {
+                  "type": "string",
+                  "example": "PTRR345",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "paymentExecutionTransaction": {
+                  "type": "string",
+                  "example": "Authorizaton",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "paymentTransactionUpdateDescription": {
+                  "type": "string",
+                  "example": "TransactionDescription",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "paymentTransaction": {
+                  "type": "string",
+                  "example": "CreditTransfer",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "paymentTransactionInitiatorReference": {
+                  "type": "string",
+                  "example": "PTIR2320",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payerReference": {
+                  "type": "string",
+                  "example": "PYRE5345",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payerBankReference": {
+                  "type": "string",
+                  "example": "PYBR1093",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeReference": {
+                  "type": "string",
+                  "example": "PAEE5007",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeProductInstanceReference": {
+                  "type": "string",
+                  "example": "PAIR7456",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeBankReference": {
+                  "type": "string",
+                  "example": "PEBR2783",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "amount": {
+                  "type": "string",
+                  "example": "$5000",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Amount    \n"
+                },
+                "currency": {
+                  "type": "string",
+                  "example": "USD",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "dateType": {
+                  "type": "string",
+                  "example": "Order",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "date": {
+                  "type": "string",
+                  "example": "2018-08-28",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Date    \n"
+                },
+                "paymentMechanism": {
+                  "type": "string",
+                  "example": "NEFT",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Name    \n"
+                },
+                "paymentTransactionUpdateResult": {
+                  "type": "string",
+                  "example": "Success",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                }
+              },
+              "example": {
+                "date": "2018-08-28",
+                "amount": "$5000",
+                "payeeReference": "PAEE5007",
+                "payeeProductInstanceReference": "PAIR7456",
+                "payerBankReference": "PYBR1093",
+                "payeeBankReference": "PEBR2783",
+                "paymentTransactionRequestReference": "PTRR345",
+                "paymentTransactionUpdateReference": "PTUR5435",
+                "paymentTransactionUpdateResult": "Success",
+                "paymentExecutionTransaction": "Authorizaton",
+                "paymentTransactionInitiatorReference": "PTIR2320",
+                "dateType": "Order",
+                "payerReference": "PYRE5345",
+                "currency": "USD",
+                "paymentTransaction": "CreditTransfer",
+                "paymentTransactionUpdateDescription": "TransactionDescription",
+                "paymentMechanism": "NEFT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment-execution/payment-execution-procedure/{cr-reference-id}/reportings/{bq-reference-id}": {
+      "get": {
+        "tags": [
+          "retrieve"
+        ],
+        "summary": "Retrieve Payment Reporting",
+        "description": "Retrieve Payment execution transaction reporting",
+        "operationId": "retrievePaymentReportingProcedure",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cr-reference-id",
+            "in": "path",
+            "description": "Payment Transaction Request Reference",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "bq-reference-id",
+            "in": "path",
+            "description": "Payment Transaction Reporting Reference",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful retrieved payment reporting",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "paymentTransactionReportingReference": {
+                  "type": "string",
+                  "example": "PTRR4543",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "paymentTransactionRequestReference": {
+                  "type": "string",
+                  "example": "PTRR3743",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "paymentTransaction": {
+                  "type": "string",
+                  "example": "PYTR5468",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "paymentTransactionInitiatorReference": {
+                  "type": "string",
+                  "example": "PTIR2320",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payerReference": {
+                  "type": "string",
+                  "example": "PYRE5345",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payerBankReference": {
+                  "type": "string",
+                  "example": "PYBR1093",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payerProductInstanceReference": {
+                  "type": "string",
+                  "example": "PARR6400",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeReference": {
+                  "type": "string",
+                  "example": "PAEE5007",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeProductInstanceReference": {
+                  "type": "string",
+                  "example": "PAIR7456",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "payeeBankReference": {
+                  "type": "string",
+                  "example": "PEBR2783",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+                },
+                "amount": {
+                  "type": "string",
+                  "example": "$5000",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Amount    \n"
+                },
+                "currency": {
+                  "type": "string",
+                  "example": "USD",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "dateType": {
+                  "type": "string",
+                  "example": "booking",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                },
+                "date": {
+                  "type": "string",
+                  "example": "2018-08-28",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Date    \n"
+                },
+                "paymentMechanism": {
+                  "type": "string",
+                  "example": "SWIFT",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Name    \n"
+                },
+                "paymentTransactionStatus": {
+                  "type": "string",
+                  "example": "Success",
+                  "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+                }
+              },
+              "example": {
+                "date": "2018-08-28",
+                "payerProductInstanceReference": "PARR6400",
+                "amount": "$5000",
+                "payeeReference": "PAEE5007",
+                "payeeProductInstanceReference": "PAIR7456",
+                "payerBankReference": "PYBR1093",
+                "payeeBankReference": "PEBR2783",
+                "paymentTransactionRequestReference": "PTRR3743",
+                "paymentTransactionReportingReference": "PTRR4543",
+                "paymentTransactionInitiatorReference": "PTIR2320",
+                "dateType": "booking",
+                "payerReference": "PYRE5345",
+                "paymentTransactionStatus": "Success",
+                "currency": "USD",
+                "paymentTransaction": "PYTR5468",
+                "paymentMechanism": "SWIFT"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PaymentExecutionUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "paymentExecutionTransaction": {
+          "type": "string",
+          "example": "Authorizaton",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "paymentTransactionUpdateDescription": {
+          "type": "string",
+          "example": "TransactionDescription",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "paymentTransaction": {
+          "type": "string",
+          "example": "CreditTransfer",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "paymentTransactionInitiatorReference": {
+          "type": "string",
+          "example": "PTIR2320",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payerReference": {
+          "type": "string",
+          "example": "PYRE5345",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payerBankReference": {
+          "type": "string",
+          "example": "PYBR1093",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payeeReference": {
+          "type": "string",
+          "example": "PAEE5007",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payeeProductInstanceReference": {
+          "type": "string",
+          "example": "PAIR7456",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payeeBankReference": {
+          "type": "string",
+          "example": "PEBR2783",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "amount": {
+          "type": "string",
+          "example": "$5000",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Amount    \n"
+        },
+        "currency": {
+          "type": "string",
+          "example": "USD",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "dateType": {
+          "type": "string",
+          "example": "Order",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "date": {
+          "type": "string",
+          "example": "2018-08-28",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Date    \n"
+        },
+        "paymentMechanism": {
+          "type": "string",
+          "example": "NEFT",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Name    \n"
+        }
+      },
+      "example": {
+        "date": "2018-08-28",
+        "amount": "$5000",
+        "payeeReference": "PAEE5007",
+        "payeeProductInstanceReference": "PAIR7456",
+        "payerBankReference": "PYBR1093",
+        "payeeBankReference": "PEBR2783",
+        "paymentExecutionTransaction": "Authorizaton",
+        "paymentTransactionInitiatorReference": "PTIR2320",
+        "dateType": "Order",
+        "payerReference": "PYRE5345",
+        "currency": "USD",
+        "paymentTransaction": "CreditTransfer",
+        "paymentTransactionUpdateDescription": "TransactionDescription",
+        "paymentMechanism": "NEFT"
+      }
+    },
+    "PaymentExecutionUpdateResponse": {
+      "type": "object",
+      "properties": {
+        "paymentTransactionUpdateReference": {
+          "type": "string",
+          "example": "PTUR5435",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "paymentTransactionRequestReference": {
+          "type": "string",
+          "example": "PTRR345",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "paymentExecutionTransaction": {
+          "type": "string",
+          "example": "Authorizaton",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "paymentTransactionUpdateDescription": {
+          "type": "string",
+          "example": "TransactionDescription",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "paymentTransaction": {
+          "type": "string",
+          "example": "CreditTransfer",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "paymentTransactionInitiatorReference": {
+          "type": "string",
+          "example": "PTIR2320",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payerReference": {
+          "type": "string",
+          "example": "PYRE5345",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payerBankReference": {
+          "type": "string",
+          "example": "PYBR1093",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payeeReference": {
+          "type": "string",
+          "example": "PAEE5007",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payeeProductInstanceReference": {
+          "type": "string",
+          "example": "PAIR7456",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payeeBankReference": {
+          "type": "string",
+          "example": "PEBR2783",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "amount": {
+          "type": "string",
+          "example": "$5000",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Amount    \n"
+        },
+        "currency": {
+          "type": "string",
+          "example": "USD",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "dateType": {
+          "type": "string",
+          "example": "Order",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "date": {
+          "type": "string",
+          "example": "2018-08-28",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Date    \n"
+        },
+        "paymentMechanism": {
+          "type": "string",
+          "example": "NEFT",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Name    \n"
+        },
+        "paymentTransactionUpdateResult": {
+          "type": "string",
+          "example": "Success",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        }
+      },
+      "example": {
+        "date": "2018-08-28",
+        "amount": "$5000",
+        "payeeReference": "PAEE5007",
+        "payeeProductInstanceReference": "PAIR7456",
+        "payerBankReference": "PYBR1093",
+        "payeeBankReference": "PEBR2783",
+        "paymentTransactionRequestReference": "PTRR345",
+        "paymentTransactionUpdateReference": "PTUR5435",
+        "paymentTransactionUpdateResult": "Success",
+        "paymentExecutionTransaction": "Authorizaton",
+        "paymentTransactionInitiatorReference": "PTIR2320",
+        "dateType": "Order",
+        "payerReference": "PYRE5345",
+        "currency": "USD",
+        "paymentTransaction": "CreditTransfer",
+        "paymentTransactionUpdateDescription": "TransactionDescription",
+        "paymentMechanism": "NEFT"
+      }
+    },
+    "PaymentExecutionRecordRequest": {
+      "type": "object",
+      "properties": {
+        "recordingRecordType": {
+          "type": "string",
+          "example": "BehaviorModelPerformanceFeedback",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "recordingRecord": {
+          "type": "object",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Binary  \n",
+          "properties": {}
+        },
+        "recordingRecordDateTime": {
+          "type": "string",
+          "example": "2018-08-28T09:00:00",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::DateTime    \n"
+        },
+        "empolyeeBusinessUnitReference": {
+          "type": "string",
+          "example": "EBUR6798",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        }
+      },
+      "example": {
+        "recordingRecordType": "BehaviorModelPerformanceFeedback",
+        "empolyeeBusinessUnitReference": "EBUR6798",
+        "recordingRecordDateTime": "2018-08-28T09:00:00",
+        "recordingRecord": "{}"
+      }
+    },
+    "PaymentExecutionRecordResponse": {
+      "type": "object",
+      "properties": {
+        "recordingRecordReference": {
+          "type": "string",
+          "example": "CRRR3456",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "recordingRecordStatus": {
+          "type": "string",
+          "example": "Applied",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        }
+      },
+      "example": {
+        "recordingRecordReference": "CRRR3456",
+        "recordingRecordStatus": "Applied"
+      }
+    },
+    "PaymentExecutionUpdateBase": {
+      "type": "object",
+      "properties": {
+        "paymentTransactionUpdateReference": {
+          "type": "string",
+          "example": "PTUR5435",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "paymentTransactionUpdateDescription": {
+          "type": "string",
+          "example": "TransactionDescription",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "paymentTransactionUpdateResult": {
+          "type": "string",
+          "example": "Success",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        }
+      },
+      "example": {
+        "paymentTransactionUpdateResult": "Success",
+        "paymentTransactionUpdateDescription": "TransactionDescription",
+        "paymentTransactionUpdateReference": "PTUR5435"
+      }
+    },
+    "PaymentExecutionUpdateBaseWithIdAndRoot": {
+      "type": "object",
+      "properties": {
+        "payerProductInstanceReference": {
+          "type": "string",
+          "example": "PARR6400",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "paymentTransactionReference": {
+          "type": "string",
+          "example": "PTRE4545",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "paymentTransactionUpdateReference": {
+          "type": "string",
+          "example": "PTUR5435",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "paymentTransactionUpdateDescription": {
+          "type": "string",
+          "example": "TransactionDescription",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "paymentTransactionInitiatorReference": {
+          "type": "string",
+          "example": "PTIR2320",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payerReference": {
+          "type": "string",
+          "example": "PYRE5345",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payerBankReference": {
+          "type": "string",
+          "example": "PYBR1093",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payeeReference": {
+          "type": "string",
+          "example": "PAEE5007",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payeeProductInstanceReference": {
+          "type": "string",
+          "example": "PAIR7456",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payeeBankReference": {
+          "type": "string",
+          "example": "PEBR2783",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "amount": {
+          "type": "string",
+          "example": "$5000",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Amount    \n"
+        },
+        "currency": {
+          "type": "string",
+          "example": "USD",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "dateType": {
+          "type": "string",
+          "example": "Order",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "date": {
+          "type": "string",
+          "example": "2018-08-28",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Date    \n"
+        },
+        "paymentMechanism": {
+          "type": "string",
+          "example": "NEFT",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Name    \n"
+        },
+        "paymentTransactionUpdateResult": {
+          "type": "string",
+          "example": "Success",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        }
+      }
+    },
+    "PaymentExecutionReportingsResponse": {
+      "type": "object",
+      "properties": {
+        "paymentTransactionReportingReference": {
+          "type": "string",
+          "example": "PTRR4543",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "paymentTransactionRequestReference": {
+          "type": "string",
+          "example": "PTRR3743",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "paymentTransaction": {
+          "type": "string",
+          "example": "PYTR5468",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "paymentTransactionInitiatorReference": {
+          "type": "string",
+          "example": "PTIR2320",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payerReference": {
+          "type": "string",
+          "example": "PYRE5345",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payerBankReference": {
+          "type": "string",
+          "example": "PYBR1093",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payerProductInstanceReference": {
+          "type": "string",
+          "example": "PARR6400",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payeeReference": {
+          "type": "string",
+          "example": "PAEE5007",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payeeProductInstanceReference": {
+          "type": "string",
+          "example": "PAIR7456",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payeeBankReference": {
+          "type": "string",
+          "example": "PEBR2783",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "amount": {
+          "type": "string",
+          "example": "$5000",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Amount    \n"
+        },
+        "currency": {
+          "type": "string",
+          "example": "USD",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "dateType": {
+          "type": "string",
+          "example": "booking",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "date": {
+          "type": "string",
+          "example": "2018-08-28",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Date    \n"
+        },
+        "paymentMechanism": {
+          "type": "string",
+          "example": "SWIFT",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Name    \n"
+        },
+        "paymentTransactionStatus": {
+          "type": "string",
+          "example": "Success",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        }
+      },
+      "example": {
+        "date": "2018-08-28",
+        "payerProductInstanceReference": "PARR6400",
+        "amount": "$5000",
+        "payeeReference": "PAEE5007",
+        "payeeProductInstanceReference": "PAIR7456",
+        "payerBankReference": "PYBR1093",
+        "payeeBankReference": "PEBR2783",
+        "paymentTransactionRequestReference": "PTRR3743",
+        "paymentTransactionReportingReference": "PTRR4543",
+        "paymentTransactionInitiatorReference": "PTIR2320",
+        "dateType": "booking",
+        "payerReference": "PYRE5345",
+        "paymentTransactionStatus": "Success",
+        "currency": "USD",
+        "paymentTransaction": "PYTR5468",
+        "paymentMechanism": "SWIFT"
+      }
+    },
+    "PaymentExecutionMechanism": {
+      "type": "object",
+      "properties": {
+        "paymentTransactionMechanismReference": {
+          "type": "string",
+          "example": "PTMR345",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "paymentTransactionRequestReference": {
+          "type": "string",
+          "example": "PTRR5678",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "paymentExecutionTransaction": {
+          "type": "string",
+          "example": "PET5674",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "achAccessServiceSessionReference": {
+          "type": "string",
+          "example": "ACHR4567",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "achAccessSchedule": {
+          "type": "string",
+          "example": "2018/09-2019/08",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Duration    \n"
+        },
+        "correspondentServiceSessionReference": {
+          "type": "string",
+          "example": "CSSR5678",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "correspondentServiceAccessSchedule": {
+          "type": "string",
+          "example": "2018/09-2019/08",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Duration     \n"
+        }
+      },
+      "example": {
+        "correspondentServiceAccessSchedule": "2018/09-2019/08",
+        "paymentExecutionTransaction": "PET5674",
+        "correspondentServiceSessionReference": "CSSR5678",
+        "paymentTransactionMechanismReference": "PTMR345",
+        "paymentTransactionRequestReference": "PTRR5678",
+        "achAccessServiceSessionReference": "ACHR4567",
+        "achAccessSchedule": "2018/09-2019/08"
+      }
+    },
+    "PaymentExecutionTransaction": {
+      "type": "object",
+      "properties": {
+        "paymenTransactionReference": {
+          "type": "string",
+          "example": "PRR123",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "paymentTransactionRequestReference": {
+          "type": "string",
+          "example": "PTRR4343",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "paymentExecutionTransaction": {
+          "type": "string",
+          "example": "PET123",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "paymentOrderReference": {
+          "type": "string",
+          "example": "POR789",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payerAccountReference": {
+          "type": "string",
+          "example": "PA8567",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payeeAccountReference": {
+          "type": "string",
+          "example": "PAR12389",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "washAccountReference": {
+          "type": "string",
+          "example": "WAR5677",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "intermediaryAccountReference": {
+          "type": "string",
+          "example": "IAR123545",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "currency": {
+          "type": "string",
+          "example": "USD",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "dateType": {
+          "type": "string",
+          "example": "booking",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "date": {
+          "type": "string",
+          "example": "2018-09-06",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Date    \n"
+        },
+        "paymentMechanism": {
+          "type": "string",
+          "example": "SWIFT",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Name    \n"
+        }
+      },
+      "example": {
+        "date": "2018-09-06",
+        "paymentExecutionTransaction": "PET123",
+        "intermediaryAccountReference": "IAR123545",
+        "dateType": "booking",
+        "payerAccountReference": "PA8567",
+        "paymentTransactionRequestReference": "PTRR4343",
+        "currency": "USD",
+        "washAccountReference": "WAR5677",
+        "payeeAccountReference": "PAR12389",
+        "paymenTransactionReference": "PRR123",
+        "paymentOrderReference": "POR789",
+        "paymentMechanism": "SWIFT"
+      }
+    },
+    "PaymentExecutionCaptureBaseWithId": {
+      "type": "object",
+      "properties": {
+        "paymentTransactionRequestReference": {
+          "type": "string",
+          "example": "PTRR8767",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "paymentTransactionInitiatorReference": {
+          "type": "string",
+          "example": "PTIR3246",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payerReference": {
+          "type": "string",
+          "example": "PYRF4543",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payerBankReference": {
+          "type": "string",
+          "example": "PYBR5463",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payerProductInstanceReference": {
+          "type": "string",
+          "example": "PPIR5322",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payeeReference": {
+          "type": "string",
+          "example": "PER5547",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payeeProductInstanceReference": {
+          "type": "string",
+          "example": "PPIR2457",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "payeeBankReference": {
+          "type": "string",
+          "example": "PBR6879",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Identifier    \n"
+        },
+        "amount": {
+          "type": "string",
+          "example": "$5000",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Amount    \n"
+        },
+        "currency": {
+          "type": "string",
+          "example": "USD",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "dateType": {
+          "type": "string",
+          "example": "booking",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Text    \n"
+        },
+        "date": {
+          "type": "string",
+          "example": "2018-09-05",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::UNCEFACT::Date    \n"
+        },
+        "paymentMechanism": {
+          "type": "string",
+          "example": "SWIFT",
+          "description": "`status: Not Mapped`\ncore-data-type-reference: BIAN::DataTypesLibrary::CoreDataTypes::ISO20022andUNCEFACT::Name\n"
+        }
+      },
+      "example": {
+        "date": "2018-09-05",
+        "payerProductInstanceReference": "PPIR5322",
+        "amount": "$5000",
+        "payeeReference": "PER5547",
+        "payeeProductInstanceReference": "PPIR2457",
+        "payerBankReference": "PYBR5463",
+        "payeeBankReference": "PBR6879",
+        "paymentTransactionRequestReference": "PTRR8767",
+        "paymentTransactionInitiatorReference": "PTIR3246",
+        "dateType": "booking",
+        "payerReference": "PYRF4543",
+        "currency": "USD",
+        "paymentMechanism": "SWIFT"
+      }
+    }
+  }
+}
