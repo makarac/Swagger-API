@@ -1,36 +1,42 @@
-# Learning-Github
-## sub heading
-### NEW Heading from a Collaborator
+# Sunlife {api-name} Documentation
 
-Just a sample repo for learning the basics of GitHub.
+## Business owner
+Contact name: <b>product-owner-name</b> | product-owner@sunlifecorp.com 
 
-more text with two line breaks between.
+## API Delivery owner
+Contact name: <b>delivery-owner-name</b> | delivery-owner@sunlifecorp.com 
 
-- first time
-- second time
-- third time
-  - indented
-    1. inner number
-    
-[this is the description](http://www.github.com)
+## API Support contacts 
+Contact name: <b>support-contact-name</b> | support-domain-api@sunlifecorp.com
 
-This paragraph has some `variable` inline code.
+## Acceptance criteria 
+1- The following acceptance criteria are presented:
+  - Criteria 1
+    - item 1
+    - item 2
+  - Criteria 2 
+  - etc.
 
-```html
-<p>A paragraph example</p>
-```
-```javascript
-let num = Math.random();
-```
+2- The other acceptance criteria:
+  - Criteria 1
+    -- item 1
+    -- item 2
+  - Criteria 2 
+  - etc. 
 
-![alt text](http://picsum.photos/200/200)
+## SLA's 
+An SLA describes the acceptable level of service availability and performance to a customer, provider or both. An array of possible API metrics includes, but is not limited to:
 
-Some paragraph with text.
-> blockquote text below the paragraph
+  - Number of service requests
 
-| heading | header | head |
-| --- | --- | --- |
-| content | more content | text |
-| more | more | more |
+  - Response time
 
-This is being * created * on a ** Friday ** ~~Saturday~~.
+  - Traffic volume
+
+  - Number of API errors
+## Consumer documentation
+ <p>Talks about systems which will interacts with API. </p>
+ 
+ ![External documentation link](http://cl11602.sunlifecorp.com:8090/display/DAADP/DE+Agile+API+Deep+Pockets+Home)
+## Architecture template
+Some architectural artifacts including flows, diagrams, are presented here! 
