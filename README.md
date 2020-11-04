@@ -1,13 +1,13 @@
-# Sunlife {api-name} Documentation
+# Sunlife <i>{api-name}</i> Documentation
 
 ## Business owner
-Contact name: <b>product-owner-name</b> | product-owner@sunlifecorp.com 
+<b>product-owner-name</b> | product-owner@sunlifecorp.com 
 
 ## API Delivery owner
-Contact name: <b>delivery-owner-name</b> | delivery-owner@sunlifecorp.com 
+<b>delivery-owner-name</b> | delivery-owner@sunlifecorp.com 
 
 ## API Support contacts 
-Contact name: <b>support-contact-name</b> | support-domain-api@sunlifecorp.com
+<b>support-contact-name</b> | support-domain-api@sunlifecorp.com
 
 ## Acceptance criteria 
 1- The following acceptance criteria are presented:
@@ -38,5 +38,8 @@ An SLA describes the acceptable level of service availability and performance to
  <p>Talks about systems which will interacts with API. </p>
  
  ![External documentation link](http://cl11602.sunlifecorp.com:8090/display/DAADP/DE+Agile+API+Deep+Pockets+Home)
+
 ## Architecture template
 Some architectural artifacts including flows, diagrams, are presented here! 
+
+![External documentation link](http://cl11602.sunlifecorp.com:8090/display/DAADP/DE+Agile+API+Deep+Pockets+Home)
