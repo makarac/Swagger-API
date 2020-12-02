@@ -1,0 +1,78 @@
+{
+    "Payee": {
+        "Nm": "String",
+        "PstlAdr": {
+            "AdrTp": {
+                "Cd": "ADDR",
+                "Prtry": {
+                    "Id": "0000",
+                    "Issr": "String",
+                    "SchmeNm": "String"
+                }
+            },
+            "Dept": "String",
+            "SubDept": "String",
+            "StrtNm": "String",
+            "BldgNb": "String",
+            "BldgNm": "String",
+            "Flr": "String",
+            "PstBx": "String",
+            "Room": "String",
+            "PstCd": "String",
+            "TwnNm": "String",
+            "TwnLctnNm": "String",
+            "DstrctNm": "String",
+            "CtrySubDvsn": "String",
+            "Ctry": "AA",
+            "AdrLine": "String"
+        },
+        "Id": {
+            "OrgId": {
+                "AnyBIC": "0000AA00",
+                "LEI": "00000000000000000000",
+                "Othr": {
+                    "Id": "String",
+                    "SchmeNm": {
+                        "Cd": "Stri",
+                        "Prtry": "String"
+                    },
+                    "Issr": "String"
+                }
+            },
+            "PrvtId": {
+                "DtAndPlcOfBirth": {
+                    "BirthDt": "String",
+                    "PrvcOfBirth": "String",
+                    "CityOfBirth": "String",
+                    "CtryOfBirth": "AA"
+                },
+                "Othr": {
+                    "Id": "String",
+                    "SchmeNm": {
+                        "Cd": "Stri",
+                        "Prtry": "String"
+                    },
+                    "Issr": "String"
+                }
+            }
+        },
+        "CtryOfRes": "AA",
+        "CtctDtls": {
+            "NmPrfx": "DOCT",
+            "Nm": "String",
+            "PhneNb": "+0-(",
+            "MobNb": "+0-(",
+            "FaxNb": "+0-(",
+            "EmailAdr": "String",
+            "EmailPurp": "String",
+            "JobTitl": "String",
+            "Rspnsblty": "String",
+            "Dept": "String",
+            "Othr": {
+                "ChanlTp": "Stri",
+                "Id": "String"
+            },
+            "PrefrdMtd": "LETT"
+        }
+    }
+}
