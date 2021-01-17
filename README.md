@@ -43,3 +43,20 @@ An SLA describes the acceptable level of service availability and performance to
 Some architectural artifacts including flows, diagrams, are presented here! 
 
 ![External documentation link](http://cl11602.sunlifecorp.com:8090/display/DAADP/DE+Agile+API+Deep+Pockets+Home)
+
+X api allows you to perform ...
+The API allows you to create, delete, and update which object
+What you can get one object, list of objects 
+
+Parameters
+Is it arbitrary or required
+Can attach/must to main object or 
+What is the use of it? e.g. can be usful for searching and tracking 
+What is its maximum, minimum limit, length (up to 512 character)
+where it appears? e.g. appears on invoices 
+
+https://idratherbewriting.com/learnapidoc/
+
+https://stripe.com/docs/api/expanding_objects
+
+
