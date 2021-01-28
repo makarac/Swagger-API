@@ -1,0 +1,15 @@
+We did a security review of the API Marketplace preview link . 
+
+Essentially we have two views 
+1)	Publicly accessible link : http://preview-api-marketplace.sunlife.com/  
+2)	Logged in link  after login using SSO  
+
+For the public link we want to implement the below restrictions , we need to lower the access to only Sunlife internal network users  ( so this not logged in page , would be accessible only by Sunlife network users (Using VPN  )  
+
+To achieve one we will provide you a 
+1)	list of IP ranges from which the requests will come in  and 
+2)	will also add a MRC header to the all requests which come to RAPID API AWS environment ( for sunlife) : something like x-sunlife-usr  
+
+the same will be needed for the production environment.   
+
+Nothing can be accessible publicly ( internet) for Sunlife API marketplace.   I will try to get this list to you and the implemented header at our end by next week .   ( also raised requests to get the data)
