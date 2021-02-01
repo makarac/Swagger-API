@@ -1,0 +1,236 @@
+---
+openapi: 3.0.0
+info:
+  title: Petstore API
+  description: 'The purpose of this API is to demonstate light-proxy integration with a Petstore rest API. <br> API to retrieve and update pets in petstore application. For information on the implementation of this API please see https://bitbucket.sunlifecorp.com/projects/EADP/repos/api-simple-web/browse.'
+  contact:
+    name: Gaurav Jaswal
+    url: https://bitbucket.sunlifecorp.com/users/qf28
+    email: Gaurav.Kumar.Jaswal@sunlife.comm
+  version: 0.1.0
+externalDocs:
+  description: Bitbucket repository link for API
+  url: https://bitbucket.sunlifecorp.com/projects/EADP/repos/api-simple-web/browse
+servers:
+- url: https://virtserver.swaggerhub.com/v1
+  description: SwaggerHub API Auto Mocking
+- url: https://dev-corp-wk-ca1-k8s.sunlifecorp.com/dev-eadpapiops-test-ns/petstore/v1
+  description: Development server environment
+- url: https://dev-corp-wk-ca1-k8s.sunlifecorp.com/sit-eadpapiops-test-ns/petstore/v1
+  description: SIT test server environment
+- url: https://prod-corp-wk-ca1-k8s.sunlifecorp.com/stage-eadpapiops-test-ns/petstore/v1
+  description: Stage server environment
+- url: https://prod-corp-wk-ca1-k8s.sunlifecorp.com/prod-eadpapiops-test-ns/petstore/v1
+  description: Production server environment
+tags:
+- name: pet
+  description: Everything about your Pets
+  externalDocs:
+    description: Code and more documentation related to pets
+    url: https://bitbucket.sunlifecorp.com/projects/EADP/repos/api-simple-web/browse
+paths:
+  /pets/{petId}:
+    get:
+      tags:
+      - pet
+      summary: Find pet by ID
+      description: Returns a single pet
+      operationId: getPetById
+      parameters:
+      - name: x-traceability-id
+        in: header
+        description: Common header parameters for centeralized logging
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/x-traceability-id'
+      - name: petId
+        in: path
+        description: Pet ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/petId'
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        400:
+          description: The request is syntactically in-correct
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        401:
+          description: Unauthorized. Authorization header is missing or does not contain a valid Bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        403:
+          description: Forbidden. Bearer token does not have sufficient rights to perform this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        404:
+          description: Pets not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        422:
+          description: The request is syntactically correct but not semantically correct
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+      security:
+      - api-scope:
+        - https://services.sunlife.com/okta/oauth2/corporate.reference-domain.petstore.pets.read
+  /pets:
+    post:
+      tags:
+      - pet
+      summary: Create a pet
+      description: Creates and returns newly created pet
+      operationId: createPet
+      parameters:
+      - name: x-traceability-id
+        in: header
+        description: Common header parameters for centeralized logging
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/x-traceability-id'
+      requestBody:
+        description: New pet to be created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pet'
+        required: true
+        
+      responses:
+        201:
+          description: Successfully created resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        400:
+          description: The request is syntactically in-correct
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        401:
+          description: Unauthorized. Authorization header is missing or does not contain a valid Bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        403:
+          description: Forbidden. Bearer token does not have sufficient rights to perform this operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        404:
+          description: The endpoint to create Pets was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        422:
+          description: The request is syntactically correct but not semantically correct
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+      security:
+      - api-scope:
+        - https://services.sunlife.com/okta/oauth2/corporate.reference-domain.petstore.pets.uad
+components:
+  schemas:
+    Pet:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID generated for the created pet
+          example: 1234
+        name:
+          type: string
+          description: The name of the created pet
+          example: doggie
+    petId:
+      type: integer
+      description: Pet ID
+      example: 12345
+    x-traceability-id:
+      type: string
+      description: TraceabilityID which is generated as UUID
+      example: 123e4567-e89b-12d3-a456-426655440000
+    EmptyDataResponse:
+      type: object
+      properties:
+        data:
+          type: string
+        notifications:
+          $ref: '#/components/schemas/Notifications'
+      description: An Error response to an API call
+    Notifications:
+      type: array
+      items:
+        $ref: '#/components/schemas/Notification'
+    Notification:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/errorCode'
+        message:
+          type: string
+          description: Description of the error or information notification. Where the response  is 2xx, it's a notification with informational details about this response
+          example: Error code 0001 message is being reported
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
+        metadata:
+          type: object
+      description: Part of the response to an API call containing information on the status and metadata associated with the response
+    errorCode:
+      type: string
+      description: 'Notification code composed as follows: Char [1] indicates severity (E,W,I); Char [2-4] indicates HTTP STATUS (422); Char [5-7] indicates API ID (001); Char [8-11] indicates Error code;'
+      example: E4220010001
+    timestamp:
+      type: string
+      description: Timestamp of the notification
+      example: 2020-09-25T17:55:04.288+00:00
+  securitySchemes:
+    api-scope:
+      type: oauth2
+      description: This API uses OAuth 2 with the client credential grant flow
+      flows:
+        clientCredentials:
+          tokenUrl: https://sunlifeapi.oktapreview.com/oauth2/aus41bwp2BafABp7h1d6/v1/token
+          scopes:
+            https://services.sunlife.com/okta/oauth2/corporate.reference-domain.petstore.pets.read: scope for read operations
+            https://services.sunlife.com/okta/oauth2/corporate.reference-domain.petstore.pets.uad: scope for update add and delete operations
