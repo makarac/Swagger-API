@@ -1,0 +1,338 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soapjms="http://www.w3.org/2010/soapjms/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://esb-ind.ca.sunlife/SLFCAIndUniveris.webservices.provider:eSignDealerNotify_WS" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" name="eSignDealerNotify_WS" targetNamespace="http://esb-ind.ca.sunlife/SLFCAIndUniveris.webservices.provider:eSignDealerNotify_WS">
+<wsdl:types>
+<xsd:schema xmlns:tns="http://esb-ind.ca.sunlife/SLFCAIndUniveris.webservices.provider:eSignDealerNotify_WS" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://esb-ind.ca.sunlife/SLFCAIndUniveris.webservices.provider:eSignDealerNotify_WS">
+<xsd:element name="eSignDealerNotify" type="tns:eSignDealerNotify"/>
+<xsd:element name="eSignDealerNotifyResponse" type="tns:eSignDealerNotifyResponse"/>
+<xsd:complexType name="eSignDealerNotify">
+<xsd:sequence>
+<xsd:element name="ServiceRequest" nillable="true" type="tns:ESignDealerNotifyServiceRequest"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ESignDealerNotifyServiceRequest">
+<xsd:sequence>
+<xsd:element name="ServiceRequest" type="tns:ServiceRequest"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceRequest">
+<xsd:sequence>
+<xsd:element name="RequestHeader" type="tns:RequestHeader"/>
+<xsd:element name="RequestBody" type="tns:RequestBody"/>
+</xsd:sequence>
+<xsd:attribute name="version" type="xsd:string" use="required"/>
+</xsd:complexType>
+<xsd:complexType name="RequestHeader">
+<xsd:sequence>
+<xsd:element name="ServiceName" type="tns:ServiceName"/>
+<xsd:element minOccurs="0" name="ApplicationVersion" type="xsd:string"/>
+<xsd:element minOccurs="0" name="Requester" type="tns:Requester"/>
+<xsd:element minOccurs="0" name="Language" type="tns:Language"/>
+<xsd:element minOccurs="0" name="EventKey" type="tns:EventKey"/>
+<xsd:element minOccurs="0" name="SessionID" type="tns:SessionID"/>
+<xsd:element minOccurs="0" name="SessionKey" type="tns:SessionKey"/>
+<xsd:element minOccurs="0" name="AuthenticationToken" type="tns:AuthenticationToken"/>
+<xsd:element minOccurs="0" name="AccessID" type="tns:AccessID"/>
+<xsd:element minOccurs="0" name="Domain" type="tns:Domain"/>
+<xsd:element minOccurs="0" name="Context" type="tns:Context"/>
+<xsd:element minOccurs="0" name="TraceLevel" type="tns:TraceLevel"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:simpleType name="ServiceName">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="Requester">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="Language">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+<xsd:enumeration value="E"/>
+<xsd:enumeration value="F"/>
+<xsd:maxLength value="1"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="EventKey">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="ObjectID" type="tns:ObjectID"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ObjectID">
+<xsd:sequence>
+<xsd:element name="Signature" type="tns:Signature"/>
+<xsd:element name="InstanceID" type="tns:InstanceID"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:simpleType name="Signature">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+<xsd:length value="4"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="InstanceID">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+<xsd:length value="16"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SessionID">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SessionKey">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="AuthenticationToken">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="AccessID">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="Domain">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="Context">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TraceLevel">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="RequestBody">
+<xsd:sequence>
+<xsd:element name="Arguments" nillable="true" type="tns:ESignDealerNotifyArguments"/>
+<xsd:element minOccurs="0" name="RequestControl" type="tns:RequestControl"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ESignDealerNotifyArguments">
+<xsd:sequence>
+<xsd:element name="ESignDealerNotifyArguments" nillable="true" type="tns:ESignDealerNotifyArguments2"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ESignDealerNotifyArguments2">
+<xsd:sequence>
+<xsd:element name="DLR_ESIGN_NOTIFY" nillable="true" type="tns:DLR_ESIGN_NOTIFY"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="DLR_ESIGN_NOTIFY">
+<xsd:sequence>
+<xsd:element name="SOURCE_SYS_DOC_ID" nillable="true" type="xsd:string"/>
+<xsd:element name="DOC_TYPE" nillable="true" type="xsd:string"/>
+<xsd:element name="CONTRACTS" nillable="true" type="tns:CONTRACTS"/>
+<xsd:element name="FILENET_DOC_ID" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="CONTRACTS">
+<xsd:sequence>
+<xsd:element maxOccurs="unbounded" name="contract" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="RequestControl">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="NextKey" type="tns:NextKey"/>
+<xsd:element minOccurs="0" name="MaximumOccurrences" type="xsd:integer"/>
+<xsd:element minOccurs="0" name="TraceLevel" type="tns:TraceLevel2"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="NextKey">
+<xsd:sequence>
+<xsd:element maxOccurs="unbounded" minOccurs="0" name="KeyElement" type="tns:KeyElement"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="KeyElement">
+<xsd:sequence>
+<xsd:element name="KeyName" type="tns:KeyName"/>
+<xsd:element name="KeyValue" type="tns:KeyValue"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:simpleType name="KeyName">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="KeyValue">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TraceLevel2">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="eSignDealerNotifyResponse">
+<xsd:sequence>
+<xsd:element name="ServiceResult" nillable="true" type="tns:ESignDealerNotifyServiceResult"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ESignDealerNotifyServiceResult">
+<xsd:sequence>
+<xsd:element name="ServiceResult" type="tns:ServiceResult"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceResult">
+<xsd:sequence>
+<xsd:element name="ResultHeader" type="tns:ResultHeader"/>
+<xsd:element name="ResultBody" type="tns:ResultBody"/>
+<xsd:element name="ResultStatus" type="tns:ResultStatus"/>
+</xsd:sequence>
+<xsd:attribute name="version" type="xsd:string" use="required"/>
+</xsd:complexType>
+<xsd:complexType name="ResultHeader">
+<xsd:sequence>
+<xsd:element name="ServiceName" type="tns:ServiceName2"/>
+<xsd:element minOccurs="0" name="ApplicationVersion" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:simpleType name="ServiceName2">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="ResultBody">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="ReturnValues" type="tns:ReturnValues"/>
+<xsd:element minOccurs="0" name="ResultControl" type="tns:ResultControl"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ReturnValues">
+<xsd:sequence> </xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ResultControl">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="MoreFound" type="tns:MoreFound"/>
+<xsd:element minOccurs="0" name="NextKey" type="tns:NextKey2"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:simpleType name="MoreFound">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+<xsd:enumeration value="Y"/>
+<xsd:enumeration value="N"/>
+<xsd:maxLength value="1"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="NextKey2">
+<xsd:sequence>
+<xsd:element maxOccurs="unbounded" minOccurs="0" name="KeyElement" type="tns:KeyElement2"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="KeyElement2">
+<xsd:sequence>
+<xsd:element name="KeyName" type="tns:KeyName2"/>
+<xsd:element name="KeyValue" type="tns:KeyValue2"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:simpleType name="KeyName2">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="KeyValue2">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="ResultStatus">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="StartTime" type="xsd:dateTime"/>
+<xsd:element minOccurs="0" name="EndTime" type="xsd:dateTime"/>
+<xsd:element name="ReturnCode" type="tns:ReturnCode"/>
+<xsd:element maxOccurs="unbounded" minOccurs="0" name="ResultMessage" type="tns:ResultMessage"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:simpleType name="ReturnCode">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="ResultMessage">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="MessageCode" type="tns:MessageCode"/>
+<xsd:element minOccurs="0" name="MessageSeverity" type="tns:MessageSeverity"/>
+<xsd:element minOccurs="0" name="MessageInformation" type="tns:MessageInformation"/>
+<xsd:element minOccurs="0" name="MessageDescription" type="tns:MessageDescription"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:simpleType name="MessageCode">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="MessageSeverity">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+<xsd:enumeration value="E"/>
+<xsd:enumeration value="W"/>
+<xsd:enumeration value="I"/>
+<xsd:maxLength value="1"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="MessageInformation">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="MessageDescription">
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="preserve"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>
+</wsdl:types>
+<wsdl:message name="eSignDealerNotify_WS_PortType_eSignDealerNotify">
+<wsdl:part name="parameters" element="tns:eSignDealerNotify"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="eSignDealerNotify_WS_PortType_eSignDealerNotifyResponse">
+<wsdl:part name="parameters" element="tns:eSignDealerNotifyResponse"> </wsdl:part>
+</wsdl:message>
+<wsdl:portType name="eSignDealerNotify_WS_PortType">
+<wsdl:operation name="eSignDealerNotify">
+<wsdl:input message="tns:eSignDealerNotify_WS_PortType_eSignDealerNotify"> </wsdl:input>
+<wsdl:output message="tns:eSignDealerNotify_WS_PortType_eSignDealerNotifyResponse"> </wsdl:output>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="SLFCAIndUniveris_webservices_provider_eSignDealerNotify_WS_Binder" type="tns:eSignDealerNotify_WS_PortType">
+<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="eSignDealerNotify">
+<soap12:operation soapAction="SLFCAIndUniveris_webservices_provider_eSignDealerNotify_WS_Binder_eSignDealerNotify" style="document"/>
+<wsdl:input>
+<soap12:body parts="parameters" use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body parts="parameters" use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="SLFCAIndUniveris.webservices.provider.eSignDealerNotify_WS">
+<wsdl:port name="SLFCAIndUniveris_webservices_provider_eSignDealerNotify_WS_Port" binding="tns:SLFCAIndUniveris_webservices_provider_eSignDealerNotify_WS_Binder">
+<soap12:address location="http://esb-prd-ind.ca.sunlife:5575/ws/SLFCAIndUniveris.webservices.provider:eSignDealerNotify_WS/SLFCAIndUniveris_webservices_provider_eSignDealerNotify_WS_Port"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>
